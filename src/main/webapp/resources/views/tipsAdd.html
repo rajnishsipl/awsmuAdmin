@@ -1,0 +1,80 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+<div class="container"><!--row Start-->
+  <div class=" post-info-rightsection ">
+    <h3 class="section-title">Add Tip </h3>
+    <form name="tipForm" novalidate>
+      <ul class="list-unstyled profile-form">
+        <li>
+          <div class="row"><!--row Start-->
+            <div class=" col-md-4 col-sm-6">
+              <label class="main-lable">Tip Title</label>
+              <input type="text" placeholder="Tip Title" class="form-control" name="tipTitle" ng-model="tip.tipTitle" ng-maxlength="50"  required>
+              <span class="error-msg" ng-if="tipSubmitted && tipForm.tipTitle.$error.required">Title is required</span> <span class="error-msg" ng-if="tipSubmitted && tipForm.tipTitle.$error.maxlength">Title should not exceed than 50 characters</span> <span class="error-msg" ng-if="errors.tipTitle">{{errors.tipTitle}}</span> </div>
+            <div class=" col-md-4 col-sm-6">
+              <label class="main-lable">Tip Problems</label>
+              <ol class="nya-bs-select clr" name="problemNames" ng-model="tip.problemNames" multiple>
+                <li nya-bs-option="problem in problemList| orderBy" data-value="problem.name"> <a> <span>{{ problem.title }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+              </ol>
+              <span class="error-msg" ng-if="errors.problemNames">{{errors.problemNames}}</span> </div>
+            <div class=" col-md-4 col-sm-6">
+              <label class="main-lable">Nationality</label>
+              <ol class="nya-bs-select clr" name="problemNames" ng-model="tip.nationality">
+                <li nya-bs-option="nationality in nationalityList| orderBy" data-value="nationality.name"> <a> <span>{{ nationality.nicename }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+              </ol>
+              <span class="error-msg" ng-if="errors.nationality">{{errors.nationality}}</span> </div>
+          </div>
+        </li>
+        <li>
+          <div class="row"><!--row Start-->
+            <div class=" col-md-4 col-sm-6">
+              <label class="main-lable">Profession</label>
+              <ol class="nya-bs-select clr" name="profession" ng-model="tip.profession">
+                <li nya-bs-option="profession in professionList| orderBy" data-value="profession.name"> <a> <span>{{ profession.name }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+              </ol>
+              <span class="error-msg" ng-if="errors.profession">{{errors.profession}}</span> </div>
+            <div class=" col-md-4 col-sm-6">
+              <label class="main-lable">Age</label>
+              <input type="text" placeholder="Age" class="form-control" name="age" ng-model="tip.age" ng-pattern="/^[0-9]{1,2}$/">
+              <span class="error-msg" ng-if="tipSubmitted && tipForm.age.$invalid">Age is invalid</span> <span class="error-msg" ng-if="errors.age">{{errors.age}}</span> </div>
+            <div class=" col-md-2 col-sm-4">
+              <label class="main-lable">Is Active</label>
+              <div class="btn-group pad-new">
+                <label class="btn btn-default" ng-class="{'active':tip.isActive == 1}">
+                  <input type="radio"  class="btn btn-default" id="q158" name="isActive" ng-model="tip.isActive" value="1" required/>
+                  <i class="fa fa-thumbs-o-up"></i> Yes</label>
+                <label class="btn btn-default" ng-class="{'active':tip.isActive == 0}">
+                  <input type="radio"  class="btn btn-default"  id="q159"  name="isActive" ng-model="tip.isActive" value="0" required/>
+                  <i class="fa fa-thumbs-o-down"></i> No </label>
+              </div>
+              <span class="error-msg" ng-if="tipSubmitted && tipForm.isActive.$error.required">Is Active is required</span> </div>
+            <div class=" col-md-2 col-sm-4">
+              <label class="main-lable">Gender</label>
+              <div class="btn-group pad-new">
+                <label class="btn btn-default" ng-class="{'active':tip.gender == 'Male'}">
+                  <input type="radio"  class="btn btn-default" id="q158" name="gender" ng-model="tip.gender" value="Male" />
+                  <i class="fa-male"></i> Male</label>
+                <label class="btn btn-default" ng-class="{'active':tip.gender == 'Female'}">
+                  <input type="radio"  class="btn btn-default"  id="q159"  name="gender" ng-model="tip.gender" value="Female" />
+                  <i class="fa-female"></i> Female </label>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="row"><!--row Start-->
+            
+            <div class=" col-md-12 col-sm-12">
+              <label class="main-lable">Tip Text</label>
+              <textarea rows="" cols="" placeholder="Add Tip Text" class="form-control" name="tipText" ng-model="tip.tipText" maxlength="500" required >
+				</textarea>
+              <span class="error-msg" ng-if="tipSubmitted && tipForm.tipText.$error.required">Tip text is required</span> <span class="error-msg" ng-if="tipSubmitted && tipForm.tipText.$error.maxlength">Tip text should not exceed than 500 characters</span> <span class="error-msg" ng-if="errors.tipText">{{errors.tipText}}</span> </div>
+            <div class=" col-md-4 col-sm-6">
+              <label class="main-lable">&nbsp;</label>
+              <input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Add Tips'}}" ng-click="addTipSubmit()" ng-disabled="loading" />
+            </div>
+          </div>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+<section class="container">
+<div class="row">
+<!--row Start-->
+<div class="col-md-12"><!-- col-md-12 Start -->
+  <h1 class="page-title"><a ng-href="#userDoctorsList" class="fl btn btn-sm btn-success" title="Back to User's Doctors List"><i class="fa fa-angle-double-left"></i> Back to User's Doctors List </a> Doctor Detail<span class="clr"></span></h1>
+</div>
+
+<div class=" col-md-3">
+ 			<div class="profile-img-section margin-btm-none">
+ 				<div class="expert-img">
+					<div class=" profile-img">    
+		    			<img alt="Profile Pic" height="100" ng-src="{{doctorDetail.imageUrl}}"  />
+		    			<!-- <span class="expert-txt-big" tooltip-placement="top" tooltip="AwsmU Expert"></span> -->
+	    			</div> 
+	    		</div> 
+	    		<h1 class="profile-name">{{doctorDetail.name}}</h1>
+	   			<h4>{{doctorDetail.country}} </h4>	   
+			</div> 
+			<ul class="side-nav list-unstyled">
+			     <li><a class="active" ng-href="#/userDoctorView/{{doctorDetail._id}}"><i class="fa fa-user"></i> Profile</a></li>
+			     <li><a ng-href="#/userDoctorEdit/{{doctorDetail._id}}" target="_self" ><i class="fa fa-pencil-square-o"></i> Edit Profile</a></li>
+			 </ul>  
+  		</div>
+<div class="col-md-9"><!-- col-md-9 Start -->
+  <div class="profile-info-rightsection"><!-- profile-info-rightsection Start -->
+    <p class="info-field">
+    	  			<label class="main-label">Name</label> {{doctorDetail.name}} <span ng-if="!doctorDetail.name">-</span>
+    			</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Id</label> <span>{{doctorDetail._id}}</span> <span ng-if="!doctorDetail._id">-</span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Specialities</label> <span ng-repeat="speciality in doctorDetail.specialties">{{speciality}}<b>,</b> </span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Office Contact No</label> <span>{{doctorDetail.officePhone}}</span>  <span ng-if="!doctorDetail.officePhone">-</span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Personal Contact No</label> <span>{{doctorDetail.personalPhone}}</span>  <span ng-if="!doctorDetail.personalPhone">-</span>
+		      	</p>
+		      	 <p class="info-field">
+		      	  <label class="main-label">Address</label> <span>{{doctorDetail.address}}</span> <span ng-if="!doctorDetail.address">-</span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Is Active</label> <span ng-if="doctorDetail.isActive == 1">Yes</span> <span ng-if="doctorDetail.isActive != 1">No</span>
+		      	</p>
+		       <p class="info-field">
+		      	  <label class="main-label">Created Date</label> <span>{{doctorDetail.createdDate}}</span> <span ng-if="!doctorDetail.createdDate">-</span>
+		      	</p>
+		      	 <p class="info-field">
+		      	  <label class="main-label">Updated Date</label> <span>{{doctorDetail.updatedDate}}</span> <span ng-if="!doctorDetail.updatedDate">-</span>
+		      	</p>
+    </div>
+ 
+</div>
+</section>

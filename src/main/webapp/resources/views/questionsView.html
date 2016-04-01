@@ -1,0 +1,41 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--container Start-->
+		<div class="post-info-rightsection "> 
+   			<h3 class="section-title">Question Details 
+   			<span class="fr">
+   			<a class="btn btn-sm btn-success" ng-href ="#/questionsEdit/{{question._id}}"><i class="fa fa-edit"></i> Edit</a>  <b> </b>  <a class="btn btn-sm btn-warning" ng-href ="#/questions"><i class="fa fa-th-list"></i> Questions List</a>
+   			</span></h3>
+	         <p class="info-field">
+	             <label class="main-label">Question</label>{{question.question}}
+	         </p>
+	         <p class="info-field">   
+                 <label class="main-label">Question Tag</label> {{question.questionTag}}
+             </p>    
+             <p class="info-field"> 
+              	<label class="main-label">Attribute Text </label> {{question.attributeText}}
+			 </p>
+			 <p class="info-field"> 
+				<label class="main-label">Options </label> <u ng-repeat="option in question.options"><lable>Text </lable>{{option.text}}<lable> Image</lable>{{option.image}}  {{$last ? '' : ', '}}</u> 
+			 </p>
+			 <p class="info-field"> 	
+				<label class="main-label">Problems Ids</label> <u ng-repeat="problemId in question.problemIds"><a ng-href="#/problemsView/{{problemId}}"> {{problemId}}{{$last ? '' : ', '}} </a></u> 
+			
+			
+			<p class="info-field"> 
+ 				<label class="main-label">Is Image</label> <span ng-if="question.isImage=='0'" >No</span><span ng-if="question.isImage=='1'" >Yes</span>
+ 			</p>
+            <p class="info-field"> 
+ 				<label class="main-label">Is Active</label> <span ng-if="question.isActive=='0'" >No</span><span ng-if="question.isActive=='1'" >Yes</span>
+ 			</p>	
+         	
+         	<p class="info-field"> 
+ 				<label class="main-label">Created Date</label> {{question.createdDate}}
+ 			</p>
+ 			
+ 			<p class="info-field"> 
+ 				<label class="main-label">Updated Date</label> {{question.updatedDate}}
+ 			</p>
+	    </div>
+	</div>
+	
+

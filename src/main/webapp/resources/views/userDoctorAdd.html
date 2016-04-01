@@ -1,0 +1,102 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+
+<section class="container">
+ 	<div class="post-info-rightsection">
+   		<h3 class="section-title">User Doctor Form</h3>
+	    	<form name="doctorForm" id="doctorForm" enctype="multipart/form-data" novalidate>
+	      		<ul class="list-unstyled profile-form">
+					<li>
+				    	<div calss="row">
+				      		
+				      		<div class="col-md-12">
+						    	<label class="main-lable">Image</label>
+						        <input name="file" id="file" type="file" ngf-select ng-model="file" class="upload" />
+								<span class="error-msg" ng-if="fileError">Please upload file in jpg, jpeg or png format with max size limit of 4 MB</span>
+						    </div>
+				      </div>
+				 		<span class="clr"></span>
+					</li>
+				    
+				    <li>
+				    	<div calss="row ">
+						    
+				            <div class="col-md-4 col-sm-6">
+				      			<label class="main-lable">Name</label>
+				        		<input type="text" class="form-control" name="name" ng-model="doctor.name" id="name" ng-maxlength="100" required placeholder="Name" />
+								<span class="error-msg" ng-if="doctorSubmitted && doctorForm.name.$error.required">Title is required</span>
+								<span class="error-msg" ng-if="doctorSubmitted && doctorForm.name.$error.maxlength">Title should not exceed than 100 characters</span>
+				      		</div>
+				     		<div class="col-md-4">
+					   			<label class="main-lable">Personal No</label>
+								<input type="text" class="form-control" name="personalPhone" ng-model="doctor.personalPhone" id="personalPhone" ng-pattern="/^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/" >  
+								<span class="error-msg" ng-if="doctorSubmitted && doctorForm.personalPhone.$invalid">Phone number is invalid</span>
+							</div>
+					
+							<div class="col-md-4">
+					    		<label class="main-lable"> Office No</label> 
+								<input type="text" class="form-control" name="officePhone" ng-model="doctor.officePhone" id="officePhone" ng-pattern="/^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/" >  
+								<span class="error-msg" ng-if="doctorSubmitted && doctorForm.officePhone.$invalid">Phone number is invalid</span>
+							</div>
+						</div>
+				 		<span class="clr"></span>
+					</li>
+				    
+				    <li>
+				    	<div calss="row ">	              
+				            <div class="col-lg-4">
+				                <label class="main-lable">Address</label>
+				                <input type="text" name="address" id="address" ng-model="doctor.address" placeholder="Address" class="form-control">
+				                <input type="hidden" name="latitude" id="latitude" ng-model="doctor.latitude" >
+				                <input type="hidden" name="longitude" id="longitude" ng-model="doctor.longitude" >
+				            </div>
+				            
+				            <div class="col-md-4">
+								<label class="main-lable">Specialties</label>			   
+								<ol id="specialties" class="nya-bs-select" ng-model="doctor.specialties" data-selected-text-format="values" multiple>
+									<li nya-bs-option="specialty in specialtieslist">
+										<a>{{specialty}}
+											<span class="glyphicon glyphicon-ok check-mark"></span>
+										</a>
+									</li>
+							  	</ol>
+							</div>
+									              	    
+		              	    <div class=" col-md-4 col-sm-6">
+				                <label class="main-lable">Is Active</label>
+				                <label><input type="checkbox" name="isActive" id="address" ng-model="doctor.isActive" /> Active?</label>
+				            </div>
+				            
+		              	    <span class="clr"></span>
+				 		</div>
+					</li>
+				    
+				    <li>
+				    	<div calss="row ">
+				    		<div class="col-md-4 col-sm-6">
+				    			<label class="main-lable">&nbsp;</label>
+				   				<input type="submit" value="{{loading && 'Please wait...' || 'Save'}}" class="btn" ng-click="doctorAddSubmit()" ng-disabled="loading">	
+				      		</div>
+				    	</div>
+						<span class="clr"></span>
+				  	</li>
+			</ul>
+		</form>
+	</div>    		
+</section>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		//google address
+		var places = new google.maps.places.Autocomplete(document.getElementById('address'));
+	    google.maps.event.addListener(places, 'place_changed', function () {
+	    	var place = places.getPlace();
+	    	
+	        var address = place.formatted_address;
+	        $("#latitude").val(place.geometry.location.lat());
+	        $("#longitude").val(place.geometry.location.lng());  
+	       			
+	    });
+	   
+	});	
+ </script>

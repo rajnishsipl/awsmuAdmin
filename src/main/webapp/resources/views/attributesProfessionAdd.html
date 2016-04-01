@@ -1,0 +1,45 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--row Start-->
+		<div class=" post-info-rightsection "> 
+			<h3 class="section-title">Add attribute degree courses</h3>
+			<form name="attributeProfessionsForm" novalidate> 
+			 <ul class="list-unstyled profile-form">
+	          <li>
+	            <div class="row"><!--row Start-->
+	              
+	              
+	              <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable" >Name</label> 
+					
+					<input type="text" placeholder="Profession Name" class="form-control" name="name" ng-model="professionsDetails.name" ng-maxlength="100"  required>
+					<span class="error-msg" ng-if="attributeProfessionsSubmitted && attributeProfessionsForm.name.$error.required">Profession name is required</span>
+					<span class="error-msg" ng-if="attributeProfessionsSubmitted && attributeProfessionsForm.name.$error.maxlength">Professions name should not exceed than 100 characters</span> 
+					
+					<span class="error-msg" ng-if="errors.name">{{errors.name}}</span>
+				  </div>
+				  
+				   <div class="col-lg-3 col-md-4 col-sm-6">
+                 	<label class="main-lable">Is Active</label>
+             		<div class="btn-group pad-new">
+                     <label class="btn btn-default" ng-class="{'active':professionsDetails.is_active == 1}">
+                     <input type="radio"  class="btn btn-default" id="q158" name="isActive" ng-model="professionsDetails.is_active" value="1" required />
+                     <i class="fa fa-thumbs-o-up"></i> Yes</label>
+                    <label class="btn btn-default" ng-class="{'active':professions.value[$index].is_active == 0}">
+                     <input type="radio"  class="btn btn-default"  id="q159"  name="isActive" ng-model="professionsDetails.is_active" value="0" required />
+                     <i class="fa fa-thumbs-o-down"></i> No </label>
+                 	</div>
+                 	
+                 	<span class="error-msg" ng-if="attributeProfessionsSubmitted && attributeProfessionsForm.isActive.$error.required">Profession Is Active required</span>
+               </div>
+				 
+					
+          		</div>
+          		</li>
+          			
+          		</ul>
+          		</form>
+          		<input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Add'}}" ng-click="addAttributeProfessionsSubmit()" ng-disabled="loading">
+       		
+      	</div>
+      </div>
+          		

@@ -1,0 +1,36 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--row Start-->
+		<div class=" post-info-rightsection "> 
+			<h3 class="section-title">Edit attribute degree courses</h3>
+			
+			 <ul class="list-unstyled profile-form">
+	          <li>
+	            <div class="row"><!--row Start-->
+	              
+	              
+	              <div ng-repeat="degreeCoursesObj in degreeCourses.value" class="col-lg-3 col-md-4 col-sm-6 attribute-fields">
+	              <ng-form name="attributeDegreeCourseForm" novalidate> 
+					<label class="main-lable" >Name</label> 
+					<div class="input-group">
+					 <input type="text" placeholder="Degree Course Name" class="form-control" name="name" ng-model="degreeCourses.value[$index]" ng-maxlength="100"  required>
+					  <span class="input-group-addon"><input type="button" class="btn btn-primary btn-sm" value="Delete" ng-click="removeData(degreeCoursesObj)"></span>
+					</div>
+					<span class="error-msg" ng-if="attributeDegreeCoursesSubmitted && attributeDegreeCourseForm.name.$error.required">Degree course name is required</span>
+					<span class="error-msg" ng-if="attributeDegreeCoursesSubmitted && attributeDegreeCourseForm.name.$error.maxlength">Degree course name should not exceed than 100 characters</span> 
+					
+					<span class="error-msg" ng-if="errors.name">{{errors.degreeCourse}}</span>
+					<span>&nbsp;</span>
+					</ng-form>
+				  </div>
+				
+				 
+					
+          		</div>
+          		</li>
+          			
+          		</ul>
+          		<input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Update'}}" ng-click="updateAttributeDegreeCoursesSubmit()" ng-disabled="loading">
+       		
+      	</div>
+      </div>
+          		

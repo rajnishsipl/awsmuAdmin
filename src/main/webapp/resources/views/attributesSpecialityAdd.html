@@ -1,0 +1,30 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--row Start-->
+		<div class=" post-info-rightsection "> 
+			<h3 class="section-title">Add Specialties</h3>
+			 <form name="attributeSpecialityForm" novalidate> 
+			  <ul class="list-unstyled profile-form">
+	          <li>
+	            <div class="row"><!--row Start-->
+	             
+	              
+	              <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable" >Name</label> 
+					
+					<input type="text" placeholder="Speciality Name" class="form-control" name="name" ng-model="speciality" ng-maxlength="100"  required>
+					<span class="error-msg" ng-if="attributeSpecialitySubmitted && attributeSpecialityForm.name.$error.required">Speciality name is required</span>
+					<span class="error-msg" ng-if="attributeSpecialitySubmitted && attributeSpecialityForm.name.$error.maxlength">Speciality name should not exceed than 100 characters</span> 
+					
+					<span class="error-msg" ng-if="errors.name">{{errors.speciality}}</span>
+				  </div>
+				
+					
+          		</div>
+          		</li>
+          			
+          		</ul>
+          		<input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Add'}}" ng-click="addAttributeSpecialitiesSubmit()" ng-disabled="loading">
+       		 </form>
+      	</div>
+      </div>
+           

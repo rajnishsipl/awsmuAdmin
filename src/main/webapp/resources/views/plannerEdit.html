@@ -1,0 +1,196 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+<section class="container">
+  <div class="row"><!--row Start-->
+   
+    <div class="col-md-3"><!-- col-md-3 Start -->
+      
+      <form id="plannerForm" class="userform-bg" name="plannerForm" novalidate>
+      <h3>Planner Info Details</h3>
+        <ul class=" profile-form list-unstyled">
+              <li class="align-left"><label class="main-lable">Nationality</label>
+                <ol class="nya-bs-select clr" id="nationality" name="nationality" ng-model="nationality">
+                  <li nya-bs-option="nationality in natioanlityList.value | orderBy" data-value="nationality.nicename"> <a> <span>{{ nationality.nicename }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                </ol></td>
+            </li>
+            <li><label class="main-lable">Problem</label>
+                <ol class="nya-bs-select clr" id="problemId" name="problemId" ng-model="problemId">
+                  <li nya-bs-option="problem in problemList| orderBy" data-value="problem._id"> <a> <span>{{ problem.title }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                </ol></li>
+            <li class="align-left"><label class="main-lable">Min Follow Time </label>
+                <input type="text" placeholder="Min Follow TIme" class="form-control" name="minFollowTime" ng-model="minFollowTime" ng-pattern="/^[0-9]{1,2}$/">
+                <span class="error-msg" ng-if="plannerSubmitted && plannerForm.minFollowTime.$invalid">Min follow time is invalid</span></li>
+            <li><label class="main-lable">Max Follow Time</label>
+                <input type="text" placeholder="Max Follow TIme" class="form-control" name="maxFollowTime" ng-model="maxFollowTime" ng-pattern="/^[0-9]{1,2}$/">
+                <span class="error-msg" ng-if="plannerSubmitted && plannerForm.maxFollowTime.$invalid">Max follow time is invalid</span></li>
+            <li><label class="main-lable">Min Age</label>
+                <input type="text" placeholder="Min Age" class="form-control" name="minAge" ng-model="minAge" ng-pattern="/^[0-9]{1,2}$/">
+                <span class="error-msg" ng-if="plannerSubmitted && plannerForm.minAge.$invalid">Age is invalid</span></li>
+            <li><label class="main-lable">Max Age </label>
+                <input type="text" placeholder="Max Age" class="form-control" name="maxAge" ng-model="maxAge" ng-pattern="/^[0-9]{1,3}$/">
+                <span class="error-msg" ng-if="plannerSubmitted && plannerForm.maxAge.$invalid">Age is invalid</span></li>
+            <li><label class="main-lable">Area </label>
+                <ol class="nya-bs-select clr" ng-model="area" required name="area">
+                  <li class="nya-bs-option" value=""> <a><span>Select a Region</span></a> </li>
+                  <li class="nya-bs-option" value="North Indian"> <a><span>North Indian</span><span class="glyphicon glyphicon-ok check-mark"></span></a> </li>
+                  <li class="nya-bs-option" value="South Indian"> <a><span>South Indian</span><span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                  <li class="nya-bs-option" value="West Indian"> <a><span>West Indian</span><span class="glyphicon glyphicon-ok check-mark"></span></a> </li>
+                  <li class="nya-bs-option" value="East Indian"> <a><span>East Indian</span><span class="glyphicon glyphicon-ok check-mark"></span></a> </li>
+                </ol>
+                <span class="error-msg" ng-if="plannerSubmitted && plannerForm.area.$error.required">Region is required</span></li>
+            <li><label class="main-lable">Gender </label>
+                <ol class="nya-bs-select clr" ng-model="gender" required name="gender">
+                  <li class="nya-bs-option" value=""> <a><span>Select a Gender</span></a> </li>
+                  <li class="nya-bs-option" value="Any"> <a><span>Any</span><span class="glyphicon glyphicon-ok check-mark"></span></a> </li>
+                  <li class="nya-bs-option" value="Male"> <a><span>Male</span><span class="glyphicon glyphicon-ok check-mark"></span></a> </li>
+                  <li class="nya-bs-option" value="Female"> <a><span>Female</span><span class="glyphicon glyphicon-ok check-mark"></span></a> </li>
+                </ol>
+                <span class="error-msg" ng-if="plannerSubmitted && plannerForm.gender.$error.required">Gender is required</span></li>
+            <li><label class="main-lable">Is Active </label>
+                <ol class="nya-bs-select clr" ng-model="isActive" required name="isActive">
+                  <li class="nya-bs-option" value="1"> <a><span>Yes</span><span class="glyphicon glyphicon-ok check-mark"></span></a> </li>
+                  <li class="nya-bs-option" value="0"> <a><span>No</span><span class="glyphicon glyphicon-ok check-mark"></span></a> </li>
+                </ol></li>
+            <li><input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Update'}}" ng-click="editPlannerInfoSubmit()" ng-disabled="loading"></li>
+          
+        </ul>
+      </form>
+    </div>
+    <!-- col-md-3 End --> 
+    <form  name="submitPlanner" id="submitPlanner" novalidate>
+    <!--Middle content start -->
+    <div class="col-md-5"><!-- col-md-9 Start -->
+      <div class="row common-activities edit-timeline-activities dashboard-activities margin-lt-none margin-rt-none">
+        
+          <h3>Timeline Activities</h3>
+          <accordion >
+            <accordion-group ng-init="isopen = $first" is-open="isopen" ng-repeat='timelineList in plannerTimelineList'>
+              <accordion-heading><i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i> {{plannerTimelineList[$index].category}}</accordion-heading>
+              <div class="row margin-lt-none margin-rt-none"> 
+                
+                <!--  <h1><i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>  {{timelineList.category}} <span class="fr">
+					 		 -->
+                <div class="col-lg-4 col-md-4 col-sm-6 attribute-fields">
+                  <label class="main-lable">Category</label>
+                  <input type="text" placeholder="Category" class="form-control" name="category" ng-model="plannerTimelineList[$index].category" ng-maxlength="200"  required>
+                  <span class="error-msg" ng-if="plannerTimeLineSubmitted && submitPlanner.category.$error.required">Category is required</span> <span class="error-msg" ng-if="plannerTimeLineSubmitted && submitPlanner.category.$error.maxlength">Category should not exceed than 200 characters</span> </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 attribute-fields">
+                  <label class="main-lable">Min Time</label>
+                  <input  value="plannerTimelineList[$index].showMinTime"   name="showMinTime" ng-model="plannerTimelineList[$index].showMinTime" data-maxtime="24:00" data-mintime="00:00" type="text" class="timepicker form-control" />
+                  <!-- <input type="text" placeholder="Min Time" class="form-control" name="showMinTime" ng-model="plannerTimelineList[$index].showMinTime"  required> --> 
+                  <span class="error-msg" ng-if="plannerTimeLineSubmitted && submitPlanner.showMinTime.$error.required">Min time is required</span> </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 attribute-fields">
+                  <label class="main-lable">Max Time</label>
+                  
+                  <!-- <input type="text" placeholder="Category" class="form-control" name="showMaxTime" ng-model="plannerTimelineList[$index].showMaxTime" required> -->
+                  <input value="plannerTimelineList[$index].showMaxTime" name="showMaxTime"  ng-model="plannerTimelineList[$index].showMaxTime" data-maxtime="24:00" data-mintime="00:00" type="text" class="timepicker form-control"/>
+                  <span class="error-msg" ng-if="plannerTimeLineSubmitted && submitPlanner.showMaxTime.$error.required">Max time is required</span> </div>
+              </div>
+              <div class="row margin-lt-none margin-rt-none">
+                <div class="col-lg-12 col-md-12 col-sm-12 attribute-fields">
+                  <label class="main-lable">Category Description </label>
+                  <textarea ng-model="plannerTimelineList[$index].description" class="form-control" ng-maxlength="500"  required name="description" rows="" cols=""></textarea>
+                  <!-- <input type="text" placeholder="Description Text" class="form-control" name="description" ng-model="plannerTimelineList[$index].description" ng-maxlength="500"  required> --> 
+                  <span class="error-msg" ng-if="plannerTimeLineSubmitted && submitPlanner.description.$error.required">Description Text is required</span> <span class="error-msg" ng-if="plannerTimeLineSubmitted && submitPlanner.description.$error.maxlength">Description Text should not exceed than 500 characters</span> </div>
+              </div>
+            </accordion-group>
+          </accordion>
+          
+          <input type="submit" class="btn btn-success btn-big" value="{{loading && 'Please wait...' || 'Update Planner'}}" ng-click="editPlannerSubmit()" ng-disabled="loading">
+       
+      </div>
+     
+    </div>
+    
+     <div class="col-md-4">
+       <div class="edit-timeline-activities">
+         <ul class="nav nav-tabs" ng-init="GeneralInstruction=true">
+            <li ng-class="{'active': GeneralInstruction==true}" class="active"><a href="javascript:void(0)" ng-click="GeneralInstruction=true;Tips=false" >General Instruction</a></li>
+            <li ng-class="{'active': Tips==true}"><a href="javascript:void(0)" ng-click="Tips=true;GeneralInstruction=false;">Tips</a></li>
+          </ul>
+          <div class="GeneralInstruction"  ng-show="GeneralInstruction" >
+            <div class="common-list tips-list">
+              <h3>General Instruction <button class="btn btn-sm fr" ng-click="addGeneralInstruction()"><i class="glyphicon glyphicon-plus"></i> Add General Instruction</button><span class="clr"></span></h3>
+              <div class="row margin-lt-none margin-rt-none">
+              <aside class="col-md-12 col-sm-12" ng-repeat='generalInstruction in generalInstructions track by $index'>
+                <textarea ng-model="generalInstructions[$index]" class="form-control" ng-maxlength="500"  required name="generalInstructionText" rows="" cols=""></textarea>
+                <span class="error-msg" ng-if="plannerTimeLineSubmitted && submitPlanner.generalInstructionText.$error.required">Instruction text is required</span> <span class="error-msg" ng-if="plannerTimeLineSubmitted && submitPlanner.generalInstructionText.$error.maxlength">Instruction text should not exceed than 500 characters</span>
+                <div class="clr"></div>
+                <button class="btn-remove btn btn-sm btn-danger" ng-click="removeGeneralInstruction(generalInstruction)" value="Remove"><i class="glyphicon glyphicon-remove"></i></button>
+              </aside>
+             </div>
+              
+            </div>
+          </div>
+          <div class="Tips" ng-show="Tips">
+            <div class="common-list tips-list">
+              <h3>Tips <button class="btn btn-sm fr" ng-click="addTip()"><i class="glyphicon glyphicon-plus"></i> Add Tips</button> <span class="clr"></span></h3>
+              <div class="row margin-lt-none margin-rt-none">
+              <aside class="col-md-12 col-sm-12"  ng-repeat='tip in tips track by $index'>
+                <textarea ng-model="tips[$index]" class="form-control" ng-maxlength="500"  required name="tipsText" rows="" cols=""></textarea>
+                <span class="error-msg" ng-if="plannerTimeLineSubmitted && submitPlanner.tipsText.$error.required">Tip text is required</span> <span class="error-msg" ng-if="plannerTimeLineSubmitted && submitPlanner.tipsText.$error.maxlength">Tip text should not exceed than 500 characters</span>
+                <div class="clr"></div>
+                <button class="btn-remove btn btn-sm btn-danger" ng-click="removeTip(tip)"><i class="glyphicon glyphicon-remove"></i></button>
+              </aside>
+              </div>
+            </div>
+          </div>
+       </div>
+      </div>
+     </form>
+  </div>
+  <!-- col-md-7 End -->
+  </div>
+  <!--row End--> 
+</section>
+<script type="text/javascript">
+ $('body').on('focus', ".timepicker", function(event) {
+	 event.stopImmediatePropagation();
+	 // alert('dsf');
+  var fousObj = $(this);
+  if (!$(this).hasClass('addedTimepicker')) {
+   $(this).timepicker({
+    'minTime' : $(this).attr('data-mintime'),
+    'maxTime' : $(this).attr('data-maxtime'),
+    'step' : 30,
+    'timeFormat' : 'H:i ',
+    'show2400' : true,
+    'orientation' : 'l'
+   });
+   $(this).on('timeRangeError', function(obj1, obj2) {
+    // do some stuff to alert the user
+    fousObj.val('');
+    $('.top-right').notify({
+     message : {
+      text : "Selected time is invalid."
+     },
+     type : "danger",
+     fadeOut : {
+      enabled : true,
+      delay : 3000
+     }
+    }).show();
+   });
+   $(this).on('timeFormatError', function(obj1, obj2) {
+    // do some stuff to alert the user
+    fousObj.val('');
+    $('.top-right').notify({
+     message : {
+      text : "Time format is invalid."
+     },
+     type : "danger",
+     fadeOut : {
+      enabled : true,
+      delay : 3000
+     }
+    }).show();
+   });
+   $(this).addClass('addedTimepicker');   
+  }
+ });
+$(document).click(function(){ 
+ $('.timing').click(function(event){
+	    event.stopImmediatePropagation();
+	    //alert('working...:)');
+	});
+});
+</script> 

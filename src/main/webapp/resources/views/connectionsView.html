@@ -1,0 +1,41 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--container Start-->
+		<div class="post-info-rightsection "> 
+   			<h3 class="section-title">connection Details 
+   			
+   			
+   			<span class="fr">
+   			<a class="btn btn-sm btn-success" ng-href ="#/connectionEdit/{{connection._id}}"><i class="fa fa-edit"></i> Edit</a>  <b> </b>  <a class="btn btn-sm btn-warning" ng-href ="#/connections"><i class="fa fa-th-list"></i> Connections List</a>
+   			</span></h3>
+	         <p class="info-field">
+	             <label class="main-label">To User</label>{{connection.toUser.displayName}}
+	         </p>
+	         <p class="info-field">
+	             <label class="main-label">From User</label>{{connection.fromUser.displayName}}
+	         </p>
+	           
+             <p class="info-field"> 
+              	<label class="main-label">Status </label> {{connection.status}}
+			 </p>
+			<p class="info-field"> 
+ 				<label class="main-label">Request Date</label> {{connection.requestDate}}
+ 			</p>
+ 			
+         	<p class="info-field"> 
+ 				<label class="main-label">Accept Date</label> {{connection.acceptDate}}
+ 			</p>
+ 			<p class="info-field"> 
+ 				<label class="main-label">Decline Date</label> {{connection.declineDate}}
+ 			</p>
+         	<p class="info-field"> 
+ 				<label class="main-label">Created Date</label> {{connection.createdDate}}
+ 			</p>
+ 			
+ 			<p class="info-field"> 
+ 				<label class="main-label">Updated Date</label> {{connection.updatedDate}}
+ 			</p>	
+         
+	    </div>
+	</div>
+	
+

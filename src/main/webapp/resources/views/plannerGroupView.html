@@ -1,0 +1,62 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+
+<section class="container">
+	<div class="row"><!--row Start-->
+	<div class="col-md-12"><h3 class="margin-top-none"><a ng-href="#plannerGroup" class="btn btn-sm btn-success" title="Back to Planner group List"><i class="fa fa-angle-double-left"></i> Back to Planner group List </a></h3></div>
+		<div class=" col-md-3 planner-grp-details"><!--col-md-3 Start-->
+		
+ 			<div class="profile-img-section margin-btm-none" style=" background:#01b3e3 url(images/{{plannerGroupDetail.banner}}) no-repeat  / 100% auto; ">
+ 			  <div class="expert-img">
+					<div class=" profile-img">    
+		    			<img alt="Profile Pic" ng-src="{{plannerGroupDetail.icon}}"  />
+	    			</div> 
+	    		</div> 
+ 			</div>
+ 			<ul class="side-nav list-unstyled">
+			     <li><span><b>Name:</b> {{plannerGroupDetail.name}}</span></li>
+			     <li><span><b>ID:</b> {{plannerGroupDetail._id}}</span></li>
+			     <li><span><b>Parent ID:</b> {{plannerGroupDetail.parent_id}}</span></li>
+			     <li><span><b>Title:</b> {{plannerGroupDetail.title}}</span></li>
+			     <li><span><b>Description:</b> {{plannerGroupDetail.description}}</span></li>
+			</ul>
+			<div class="user-list">
+			 <ul class="list-group list-unstyled" >
+		        <li class="list-group-item" ng-repeat="planner in plannerGroupDetail.trends">
+		          <span class="rec-user-img"> 
+		           <span class="fl sender-name">
+		             <img alt="Planner Icon" ng-src="resources/images/icon/{{planner.icon}}">
+		          </span>
+				 </span>
+		         <span class="rec-user-name">
+		             <b>{{planner.title}}</b>
+					 
+			     </span> 
+					 <span class="clr"></span>
+		        </li>
+		      </ul>
+		    </div>
+ 	    </div><!--col-md-3 End-->
+ 	    <div class=" col-md-9">
+ 	    
+ 	    <div class="plannerGroupMemberGrid">
+<h4>Planner Group Members</h4>
+	<div class="row" ng-controller="plannerGroupMemberCtrl">
+		<div class="col-md-12">
+	  		<ng-jqgrid config="config" addnew="true" modeldata="griddata" gridid="plannerGroupMembersId" pagerid="groupMemberPager" api="gridapi"></ng-jqgrid>
+	  	</div>
+	</div>
+</div>
+
+<div class="plannerGroupMemberGrid">
+<h4>Planner Group Posts</h4>
+	<div class="row" ng-controller="plannerGroupPostCtrl">
+		<div class="col-md-12">
+	  		<ng-jqgrid config="config" addnew="true" modeldata="griddata" gridid="plannerGrouPostsId" pagerid="groupPostPager" api="gridapi"></ng-jqgrid>
+	  	</div>
+	</div>
+</div>
+ 	    
+ 	    </div>
+ 	</div><!--row End-->
+</section>
+

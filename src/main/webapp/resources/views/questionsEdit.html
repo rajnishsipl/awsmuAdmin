@@ -1,0 +1,142 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--row Start-->
+		<div class=" post-info-rightsection "> 
+			<h3 class="section-title">Edit Question </h3>
+			
+			
+			<form name="questionForm" novalidate> 
+			 <ul class="list-unstyled profile-form">
+	          <li>
+		            <div class="row"><!--row Start-->
+			              <div class="col-lg-3 col-md-4 col-sm-6">
+							<label class="main-lable">Question</label> 
+							
+							<textarea rows="" cols="" placeholder="Add question" class="form-control" name="question" ng-model="question.question" maxlength="500" required>
+							</textarea>
+							
+							<span class="error-msg" ng-if="questionSubmitted && questionForm.question.$error.required">question text is required</span>
+							<span class="error-msg" ng-if="questionSubmitted && questionForm.question.$error.maxlength">question text should not exceed than 500 characters</span> 
+							<span class="error-msg" ng-if="errors.name">{{errors.question}}</span>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6">
+		                 <label class="main-lable">Question Tag</label> 
+			              	<input type="text" placeholder="Question Tag" class="form-control" name="questionTag" ng-model="question.questionTag" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]{2,50}$/" required>
+							<span class="error-msg" ng-if="questionSubmitted && questionForm.questionTag.$error.required">Question tag is required</span>
+							<span class="error-msg" ng-if="questionSubmitted && questionForm.questionTag.$error.maxlength">Question tag should not exceed than 50 characters</span> 
+							<span class="error-msg" ng-if="questionSubmitted && questionForm.questionTag.$invalid">Question tag is incorrect</span>
+							<span class="error-msg" ng-if="errors.name">{{errors.questionTag}}</span>
+		          		</div>
+	          		</div>
+          		</li>
+          		
+          		<li>
+		            <div class="row"><!--row Start-->
+		                <div class="col-lg-6 col-md-6 col-sm-6">
+			             	<label class="main-lable"> Problems</label>
+				            <ol class="nya-bs-select clr" name="problemIds" ng-model="question.problemIds" actions-box="true" required multiple>
+			                  <li nya-bs-option="problem in problemList"  data-value="problem._id"> <a> <span>{{ problem.title }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+			                </ol>
+			               <span class="error-msg" ng-if="errors.problemIds">{{errors.problemIds}}</span>
+						</div>
+						
+						<div class="col-lg-3 col-md-4 col-sm-6">
+		                 	<label class="main-lable">Is Image</label>
+		             		<div class="btn-group pad-new">
+		                     <label class="btn btn-default" ng-class="{'active':question.isImage == 1}">
+		                     <input type="radio"  class="btn btn-default" id="q158" name="isImage" ng-model="question.isImage" value="1" required/>
+		                     <i class="fa-male"></i> Yes</label>
+		                    <label class="btn btn-default" ng-class="{'active':question.isImage == 0}">
+		                     <input type="radio"  class="btn btn-default"  id="q159"  name="isImage" ng-model="question.isImage" value="0" required />
+		                     <i class="fa-female"></i> No </label>
+		                      <span class="error-msg" ng-if="questionSubmitted && questionForm.isImage.$error.required">Image is required</span>
+		                 	</div>
+		               </div>
+						
+	          		</div>
+          		</li>
+          		
+          		
+          		 <li>
+			         <div class="row"><!--row Start-->
+			           
+			      		<div class="col-lg-3 col-md-4 col-sm-6">
+		                 	<label class="main-lable">Is User Attribute</label>
+		             		<div class="btn-group pad-new">
+		                     <label class="btn btn-default" ng-class="{'active':question.isUserAttribute == 1}">
+		                     <input type="radio"  class="btn btn-default" id="q160" name="isUserAttribute" ng-model="question.isUserAttribute" value="1" required/>
+		                     <i class="fa-male"></i> Yes</label>
+		                    <label class="btn btn-default" ng-class="{'active':question.isUserAttribute == 0}">
+		                     <input type="radio"  class="btn btn-default"  id="q161"  name="isUserAttribute" ng-model="question.isUserAttribute" value="0" required />
+		                     <i class="fa-female"></i> No </label>
+		                      <span class="error-msg" ng-if="questionSubmitted && questionForm.isUserAttribute.$error.required">User attribute is required</span>
+		                 	</div>
+		               </div>
+						
+						<div class="col-lg-6 col-md-6 col-sm-6">
+		                 <label class="main-lable">Attribute Text </label> 
+			              	<input type="text" placeholder="Attribute Text" class="form-control" name="attributeText" ng-model="question.attributeText" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]{2,50}$/" ng-required="question.isUserAttribute == '1'">
+							<span class="error-msg" ng-if="questionSubmitted && questionForm.attributeText.$error.required">Attribute Text is required</span>
+							<span class="error-msg" ng-if="questionSubmitted && questionForm.attributeText.$error.maxlength">Attribute Text should not exceed than 50 characters</span> 
+							<span class="error-msg" ng-if="questionSubmitted && questionForm.attributeText.$invalid">Attribute Text is incorrect</span>
+							<span class="error-msg" ng-if="errors.name">{{errors.attributeText}}</span>
+		          		</div>
+			      		
+			      		
+			     	</div>
+          		</li>
+          	
+          		<li ng-repeat="option in options"> 
+	          		<div class="row"><!--row Start-->
+	  
+		                 	<label class="main-lable">Option - {{$index+1}}  </label>
+		             		 
+		             		 <div class="col-lg-3 col-md-4 col-sm-6 attribute-fields">
+		                     	<label class="main-lable">Option Text </label>
+		                     	<div class="input-group">
+		                     		<input type="text" placeholder="Option Text" class="form-control" name="optionText" ng-model="options[$index].text" ng-maxlength="500"  required> 
+		                    		<span class="error-msg" ng-if="questionSubmitted && questionForm.optionText.$error.required">Option Text is required</span>
+		                    		<span class="error-msg" ng-if="questionSubmitted && questionForm.optionText.$error.maxlength">Option Text should not exceed than 500 characters</span> 
+							 	</div>
+							</div>
+							<div class="col-lg-3 col-md-4 col-sm-6">
+		                     	<label class="main-lable">Exsisting Image</label>
+		                     	<img height="100" ng-src="{{question.imageUrl+option.image}}" alt="" />
+		                    </div>
+							<div class="col-lg-3 col-md-4 col-sm-6" >
+							 	<label class="main-lable">Option Image </label> 
+		                     	<input  onchange="angular.element(this).scope().fileChanged(this)" id="{{$index}}" type="file"  name="optionImage[]" ngf-select ng-model="options[$index].image"  class="upload">
+		                        <span class="error-msg" ng-if="imageError[$index+1]">Please upload file in jpg, jpeg or png format with max size limit of 4 MB</span>
+		                    </div>
+		                    <div class="col-lg-3 col-md-4 col-sm-6" >
+		                     	<input type="button" class="btn btn-sm " ng-click="removeOptions(option)" value="Remove Option"/>
+		                    </div>
+					</div>
+		                    
+	         </li>
+          	  <li>
+	          		<div class="row"><!--row Start-->
+	          			<div class="col-lg-3 col-md-4 col-sm-6">
+	          			<input type="button" class="btn" ng-click="addOptions()" value="Add more Option"/>
+		                 	<label class="main-lable">Is Active</label>
+		             		<div class="btn-group pad-new">
+		                     <label class="btn btn-default" ng-class="{'active':question.isActive == 1}">
+		                     <input type="radio"  class="btn btn-default" id="q156" name="isActive" ng-model="question.isActive" value="1" required/>
+		                     <i class="fa-male"></i> Yes</label>
+		                    <label class="btn btn-default" ng-class="{'active':question.isActive == 0}">
+		                     <input type="radio"  class="btn btn-default"  id="q157"  name="isActive" ng-model="question.isActive" value="0" required />
+		                     <i class="fa-female"></i> No </label>
+		                      <span class="error-msg" ng-if="questionSubmitted && questionForm.isActive.$error.required">Is Active is required</span>
+		                 	</div>
+		               </div>
+	          		 </div>
+	          		 <input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Update'}}" ng-click="updateQuestionSubmit()" ng-disabled="loading">
+          		</li>
+          		
+          		
+          		
+       		</ul>
+       		</form>
+       		
+      	</div>
+      </div>
+          		

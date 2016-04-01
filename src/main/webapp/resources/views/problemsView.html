@@ -1,0 +1,38 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--container Start-->
+		<div class="post-info-rightsection "> 
+   			<h3 class="section-title">Problem Details 
+   			<span class="fr">
+   			<a class="btn btn-sm btn-success" ng-href ="#/problemsEdit/{{problem._id}}"><i class="fa fa-edit"></i> Edit</a>  <b> </b>  <a class="btn btn-sm btn-warning" ng-href ="#/problems"><i class="fa fa-th-list"></i> Problems List</a>
+   			</span></h3>
+	         <p class="info-field">
+	             <label class="main-label">Problem Name</label>{{problem.name}}
+	         </p>
+	         <p class="info-field">   
+                 <label class="main-label">Problem Title</label> {{problem.title}}
+             </p>    
+             <p class="info-field"> 
+              	<label class="main-label">Parent Problem </label> {{problem.parent_id}}
+			 </p>
+			 <p class="info-field"> 
+				<label class="main-label">Description </label> {{problem.description}}
+			 </p>
+			 <p class="info-field"> 	
+				<label class="main-label">Trends</label> <u ng-repeat="trend in problem.trends">{{trend.title}}{{$last ? '' : ', '}}</u> 
+			</p>
+			
+            <p class="info-field"> 
+ 				<label class="main-label">Is Active</label> <span ng-if="problem.isActive=='0'" >No</span><span ng-if="problem.isActive=='1'" >Yes</span>
+ 			</p>	
+         	
+         	<p class="info-field"> 
+ 				<label class="main-label">Created Date</label> {{problem.createdDate}}
+ 			</p>
+ 			
+ 			<p class="info-field"> 
+ 				<label class="main-label">Updated Date</label> {{problem.updatedDate}}
+ 			</p>
+	    </div>
+	</div>
+	
+

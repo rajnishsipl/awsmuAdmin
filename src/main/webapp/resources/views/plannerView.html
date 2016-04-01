@@ -1,0 +1,212 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+<section class="container">
+  <div class="row"><!--row Start-->
+  <div class="col-md-12"><!-- col-md-12 Start -->
+  <h1 class="page-title"><a ng-href="#planners" class="fl btn btn-sm btn-success" title="Back to Planners List"><i class="fa fa-angle-double-left"></i> Back to Planners List </a> Default Planner View<span class="clr"></span></h1>
+  </div>
+    <div class="col-md-3"><!-- col-md-3 Start -->
+      <table class="table discribtion-table mrg-btn table-bordered">
+        <thead>
+          <th>Problem Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><p class="">Planner Banner <span>{{problemDetail.banner}}</span></p></td>
+         </tr>
+          <tr>
+            <td>
+            <p class="">Planner Icon <span>{{problemDetail.icon}}</span></p></td>
+          </tr>
+          <tr>
+            <td><p class="">Planner Name <span>{{problemDetail.name}}</span></p></td>
+            </tr>
+          <tr>
+            <td><p class="">Planner Title <span>{{problemDetail.title}}</span></p></td>
+          </tr>
+          <tr>
+          	<td><p class="">Planner Description <span>{{problemDetail.description}}</span></p></td>
+          </tr>
+          </tbody>
+      </table>
+      <table class="table discribtion-table mrg-btn table-bordered">
+        <thead>
+          <th>Planner Info Details</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              	<p class="">
+              		Min Follow Time <span>{{plannerInfoList.minFollowTime}}</span>
+                </p>
+            </td>
+            </tr>
+          <tr>
+            <td>
+              	<p>
+              		Max Follow Time <span>{{plannerInfoList.maxFollowTime}}</span>
+                </p>
+            </td>
+            </tr>
+          <tr>
+            <td>
+				<p>
+              		Min Age <span>{{plannerInfoList.minAge}}</span>
+                </p>
+            </td>
+            </tr>
+          <tr>
+            <td>
+              	<p>
+              		Max Age <span>{{plannerInfoList.maxAge}}</span>
+                </p>
+            </td>
+            </tr>
+          <tr>
+            <td>
+              	<p>
+              		Nationality <span>{{plannerInfoList.nationality}}</span>
+                </p>
+            </td>
+            </tr>
+          <tr>
+            <td>
+              	<p>
+              		Gender <span>{{plannerInfoList.gender}}</span>
+                </p>
+            </td>
+            </tr>
+          <tr>
+            <td>
+              	<p>
+              		Is Active <span>{{plannerInfoList.isActive}}</span>
+                </p>
+            </td>
+             </tr>
+          <tr>           
+            <td>
+              <p>Total Activity <span>{{plannerInfoList.totalActivity}}</span></p></td>
+          </tr>
+          <tr>
+            <td>
+              <p>Created Date<span>{{plannerInfoList.createdDate}}</span></p></td>
+           </tr>
+          <tr>
+            <td>
+              <p>Updated Date <span>{{plannerInfoList.updatedDate}}</span></p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- col-md-3 End --> 
+    
+    <!--Middle content start -->
+   <div class="col-md-9"><!-- col-md-9 Start -->
+    <div class="row common-activities edit-activities dashboard-activities">
+      <form  name="submitPlanner" id="submitPlanner" novalidate>
+        <div class="col-sm-7"><!--.col-sm-7 Start--> 
+          	<!--  <h3>Timeline Activities</h3> -->
+          	<ul class="cbp_tmtimeline">	
+				<li ng-repeat='timelineList in plannerTimelineList'>
+					<div class="cbp_tmicon timeline-bg-success">
+						<i class="fa-star-o "></i>
+					</div>
+					<div class="cbp_tmlabel  padding-btm-none">
+					 
+					 <accordion>
+						 <accordion-group is-open="status.open">
+							 <accordion-heading>
+							     <h1><i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>  {{timelineList.category}} <span class="fr">
+					 			 <i class="fa-clock-o"></i> {{timelineList.showUserPreferTime}}</span><span class="clr"></span></h1>
+							     <div class="activity-discription"> {{timelineList.description}}  </div>
+							  </accordion-heading>
+							  <aside ng-repeat='timelineActivity in timelineList.activities'>
+									<h2> <blockquote>{{timelineActivity.action}} <span class="fr">{{timelineActivity.amount}} <b ng-if="generalList.frequency">|| {{timelineActivity.frequency}}</b></span></blockquote> </h2>
+									<p class="planner-discription">{{timelineActivity.description}}</p>
+									<p class="clr" ng-if="timelineActivity.frequencyValues">  <label ng-repeat='frequencyValues in timelineActivity.frequencyValues'><i class="fa-dot-circle-o"></i>  {{frequencyValues}}</label></p>
+									<div class="clr"></div>
+								 </aside>
+						 </accordion-group>
+					 </accordion>
+					 
+					 </div>
+				</li>
+	        </ul>
+        </div>
+        <!--.col-sm-7 End-->
+        <div class="col-sm-5"><!--.col-sm-5 Start-->
+          
+          <ul class="list-unstyled width-full">
+            <li ng-if="plannerGeneralList[0].userActivities.length==0">
+              <div class="common-list general-list padding-btm-none">
+                <h1>General Activities</h1>
+                <div class="listbtm-margin" ng-repeat='generalList in plannerGeneralList[0].userActivities' ng-if="generalList.isShow">
+                  <aside class="margin-btm-none">
+                    <h2>
+                      <blockquote>{{generalList.action}} <span  class="fr">{{generalList.amount}} <b ng-if="generalList.frequency">|| {{generalList.frequency}}</b></span></blockquote>
+                    </h2>
+                    <p class="planner-discription">{{generalList.description}}</p>
+                    <p ng-if="generalList.frequencyValues" class="clr"><span class="label label-info"></span>
+                      <label class="fr" ng-repeat='frequencyValues in generalList.frequencyValues'><i class="fa-dot-circle-o"></i> {{frequencyValues}}&nbsp; </label>
+                    </p>
+                    <div class="clr"></div>
+                  </aside>
+                  <div class="btn-group clr ans-btn">
+                    <label>Activity done?</label>
+                    <button class="btn btn-default no-btn fr" id="{{generalList.activityId}}No" ng-click="actionsSubmit(generalList.activityId, 'No')" ng-class="{'active':generalList.isPerformed == 'No'}" ng-disabled="generalList.isPerformed == 'No'">No</button>
+                    <button class="btn btn-default yse-btn fr"  id="{{generalList.activityId}}Yes" ng-click="actionsSubmit(generalList.activityId, 'Yes')"  ng-class="{ 'active': generalList.isPerformed == 'Yes'}" ng-disabled="generalList.isPerformed == 'Yes'">Yes</button>
+                    <div class="clr"></div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li ng-if="plannerTipsList[0].userActivities==0">
+              <div class="common-list tips-list padding-btm-none">
+                <h1>Tips</h1>
+                <div class="listbtm-margin"  ng-repeat='tipList in plannerTipsList[0].userActivities' ng-if="tipList.isShow">
+                  <aside class="margin-btm-none">
+                    <h2>
+                      <blockquote>{{tipList.action}} <span class=" fr">{{tipList.amount}} <b ng-if="tipList.frequency">|| {{tipList.frequency}}</b></span></blockquote>
+                    </h2>
+                    <p class="planner-discription">{{tipList.description}}</p>
+                    <p ng-if="tipList.frequencyValues" class="clr">
+                      <label class="fr" ng-repeat='frequencyValues in tipList.frequencyValues'><i class="fa-dot-circle-o"></i> {{frequencyValues}}&nbsp; </label>
+                    </p>
+                    <div class="clr"></div>
+                  </aside>
+                  <div class="btn-group  ans-btn clr">
+                    <label>Activity done?</label>
+                    <button class="btn btn-default no-btn fr" id="{{tipList.activityId}}No" ng-click="actionsSubmit(tipList.activityId, 'No')" ng-class="{'active': tipList.isPerformed == 'No'}" ng-disabled="tipList.isPerformed == 'No'">No</button>
+                    <button class="btn btn-default yes-btn fr"  id="{{tipList.activityId}}Yes" ng-click="actionsSubmit(tipList.activityId, 'Yes')"  ng-class="{ 'active': tipList.isPerformed == 'Yes'}" ng-disabled="tipList.isPerformed == 'Yes'">Yes</button>
+                    <div class="clr"></div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="common-list tips-list">
+                <h1>General Instruction</h1>
+                <aside ng-repeat='generalInstruction in generalInstructions'>
+                  <p class="planner-discription">{{generalInstruction}}</p>
+                  <div class="clr"></div>
+                </aside>
+              </div>
+            </li>
+            <li>
+              <div class="common-list tips-list">
+                <h1>Tips</h1>
+                <aside ng-repeat='tip in tips'>
+                  <p class="planner-discription">{{tip}}</p>
+                  <div class="clr"></div>
+                </aside>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!--.col-sm-5 End-->
+        
+      </form>
+    </div>
+   </div><!-- col-md-7 End -->
+  </div>
+  <!--row End--> 
+</section>

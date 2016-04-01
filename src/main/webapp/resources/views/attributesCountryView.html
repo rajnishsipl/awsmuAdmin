@@ -1,0 +1,38 @@
+
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--container Start-->
+		<div class="post-info-rightsection "> 
+   			<h3 class="section-title">country Details 
+   			<span class="fr">
+   			<a class="btn btn-sm btn-success" ng-href ="#/attributesCountryEdit/{{countries._id}}"><i class="fa fa-edit"></i> Edit</a>  <b> </b>  <a class="btn btn-sm btn-warning" ng-href ="#/attributes"><i class="fa fa-th-list"></i> Attributes  List</a>
+   			</span></h3>
+	         <table class="table table-striped">
+	          <thead>
+	          <tr>
+	           <th>ISO</th>
+	           <th>Name</th>
+	           <th>Nickname</th>
+	           <th>ISO3</th>
+	           <th>Numcode</th>
+	           <th>Nationality</th>
+	           <th>Phonecode</th>
+	           </tr>
+	          </thead>
+	          <tbody>
+	            <tr ng-repeat="country in countries.value" >
+	             <td>{{country.iso}}</td>
+		         <td>{{country.name}}</td>
+		           <td>{{country.nickname}}</td>
+		           <th>{{country.iso3}}</th>
+		           <td>{{country.numcode}}</td>
+		           <td>{{country.nationality}}</td>
+		           <td>{{country.phonecode}}</td>
+	            </tr>
+	          </tbody>
+	         </table>
+
+	         
+	    </div>
+	</div>
+	
+

@@ -1,0 +1,30 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--container Start-->
+		<div class="post-info-rightsection "> 
+   			<h3 class="section-title">Trend Details 
+   			<span class="fr">
+   			<a class="btn btn-sm btn-success" ng-href ="#/trendsEdit/{{trend._id}}"><i class="fa fa-edit"></i> Edit</a>  <b> </b>  <a class="btn btn-sm btn-warning" ng-href ="#/trends"><i class="fa fa-th-list"></i> Trend List</a>
+   			</span></h3>
+	         <p class="info-field">
+	             <label class="main-label">Trend Title</label>{{trend.title}}
+	         </p>
+	         
+	         <p class="info-field">
+	             <label class="main-label">Trend Icon</label>{{trend.icon}}
+	         </p>
+			
+            <p class="info-field"> 
+ 				<label class="main-label">Is Active</label> <span ng-if="trend.isActive=='0'" >No</span><span ng-if="trend.isActive=='1'" >Yes</span>
+ 			</p>	
+         	
+         	<p class="info-field"> 
+ 				<label class="main-label">Created Date</label> {{trend.createdDate}}
+ 			</p>
+ 			
+ 			<p class="info-field"> 
+ 				<label class="main-label">Updated Date</label> {{trend.updatedDate}}
+ 			</p>
+	    </div>
+	</div>
+	
+

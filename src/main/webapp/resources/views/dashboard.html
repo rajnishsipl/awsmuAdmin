@@ -1,0 +1,116 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+
+<section class="container">
+  <div class="row"><!--row Start-->
+    <div class="col-md-12"><!-- col-md-12 Start -->
+      <h1 class="page-title">Dashboard</h1>
+    </div>
+    
+    <div class="col-md-3 total-count total-planners"><!-- col-md-3 Start -->
+    
+     <aside class="xe-widget xe-counter ">
+	    <div class="xe-icon"> <i class="fa fa-users"></i> </div>
+	    <div class="xe-label"> <strong class="num">{{totalUsersCount}}</strong><span>Total Users <a href="#users">See all <i class="fa fa-angle-double-right"></i></a></span> </div>
+	  </aside>
+	
+    </div><!-- col-md-3 End -->
+    <div class="col-md-3 total-count total-planners"><!-- col-md-3 Start -->
+   
+     <aside class="xe-widget xe-counter xe-counter-info">
+	    <div class="xe-icon"> <i class="fa fa-comments-o"></i> </div>
+	    <div class="xe-label"> <strong class="num">{{unreadMessagesCount}}</strong><span>Unread Messages <a href="#messages">See all <i class="fa fa-angle-double-right"></i></a></span> </div>
+	  </aside>
+
+    </div><!-- col-md-3 End -->
+    <div class="col-md-3 total-count total-planners xe-counter-warning"><!-- col-md-3 Start -->
+   
+     <aside class="xe-widget xe-counter">
+	    <div class="xe-icon"> <i class="fa fa-list-ol"></i> </div>
+	    <div class="xe-label"> <strong class="num">{{totalPlannersCount}}</strong><span>Total Planners <a href="#planners" target="_top">See all <i class="fa fa-angle-double-right"></i></a></span> </div>
+	  </aside>
+
+    </div><!-- col-md-3 End -->
+    <div class="col-md-3 total-count total-planners"><!-- col-md-3 Start -->
+  
+     <aside class="xe-widget xe-counter xe-counter-danger">
+	    <div class="xe-icon"> <i class="fa fa-user-md"></i> </div>
+	    <div class="xe-label"> <strong class="num">{{totalExpertRequestsCount}}</strong><span>Expert Requests <a href="#expertRequests" target="_top">See all <i class="fa fa-angle-double-right"></i></a></span> </div>
+	  </aside>
+	
+    </div><!-- col-md-3 End -->
+    
+    <div class="col-md-3 user-list"><!-- col-md-3 Start --> 
+    <h4>Latest Users</h4>
+      <ul class="list-group list-unstyled" ng-if="latestUserList">
+        <li class="list-group-item" ng-repeat="user in latestUserList">
+          <span class="rec-user-img"> 
+           <a title="{{user.displayName}}" href="#userView/{{user._id}}" class="fl sender-name">
+             <img alt="Profile pic" ng-src="{{user.image}}">
+          </a>
+		 </span>
+         <span class="rec-user-name"><em>
+             <a class="member-name" href="#userView/{{user._id}}"><b>{{user.displayName}}</b></a>
+			 <i>- {{user.createdDate}}</i></em>
+			 <a href="#" target="_top">{{user.country}}</a>
+	     </span> 
+			 <span class="clr"></span>
+        </li>
+      </ul>
+    </div><!-- col-md-3 End -->
+    
+     <div class="col-md-3 user-list"><!-- col-md-3 Start --> 
+    <h4>Messages</h4>
+      <ul class="list-group list-unstyled" ng-if="messagesList">
+        <li class="list-group-item" ng-repeat="message in messagesList">
+          <span class="rec-user-img"> 
+           <a title="{{message.displayName}}" class="fl sender-name" target="_top">
+             <img alt="Profile pic" ng-src="{{ message.image}}">
+          </a>
+		 </span>
+         <span class="rec-user-name"><em>
+             <a class="member-name ng-binding" href="#/messageThread/{{message.chainId}}" target="_top"><b>{{message.displayName}}</b>
+			 <i>- {{message.dateTime}}</i></em>
+			 <span ng-bind-html="message.message"></span>
+	     </span> 
+	     </a>
+			 <span class="clr"></span>
+        </li>				
+      </ul>
+    </div><!-- col-md-3 End -->
+    
+    
+     <div class="col-md-3 user-list"><!-- col-md-3 Start --> 
+    <h4>Latest User's Planners</h4>
+      <ul class="list-group list-unstyled" ng-if="userPlannersList">
+        <li class="list-group-item" ng-repeat="userPlanner in userPlannersList">
+          
+         <span class="rec-user-name"><em>
+             <a class="member-name ng-binding" ng-href="userPlannerView/{{userPlanner._id}}" ><b>{{userPlanner.plannerName}} </b></a>
+			 <i>- By <a ng-href="#userView/{{userPlanner.userId}}">{{userPlanner.userId}}</a> </i></em>
+			 <span>Created: {{userPlanner.createdDate}}</span>
+	     </span> 
+			 <span class="clr"></span>
+        </li>
+       
+      </ul>
+    </div><!-- col-md-3 End -->
+    
+    
+     <div class="col-md-3 user-list"><!-- col-md-3 Start --> 
+    <h4>Experts Request</h4>
+      <ul class="list-group list-unstyled" ng-if="expertRequestsList">
+        <li class="list-group-item" ng-repeat="expertRequest in expertRequestsList">
+       
+         <span class="rec-user-name"><em>
+             <a class="member-name" href="#expertRequest/{{expertRequest._id}}"><b>{{expertRequest.firstName}} {{expertRequest.lastName}}</b></a>
+			 <i>- {{expertRequest.createdDate}}</i></em>
+			 <a href="#" target="_top">{{expertRequest.city}} {{expertRequest.country}}</a>
+	     </span> 
+			 <span class="clr"></span>
+        </li>
+ 
+      </ul>
+    </div><!-- col-md-3 End -->
+    
+  </div>
+</section>

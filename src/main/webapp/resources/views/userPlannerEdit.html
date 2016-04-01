@@ -1,0 +1,387 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+
+<section class="container ">
+<form name="submitPlanner" id="submitPlanner" novalidate>
+	<div class="row">
+		<div class="col-md-3 col-sm-4"><!-- col-sm-4 col-sm-5 Start -->
+			<!-- Edit Form Start -->
+			<div class="self-info margin-btm-none editdetail-planner">
+				<!--self-info Start-->
+				<h3>
+					<a ng-href="#/userPlannerView/{{plannerInfoList['plannerId']}}" class="fr btn btn-success" title="Done Editing"><i class="fa-thumbs-o-up"></i> <span>Done</span></a>
+					<div class="clr"></div>
+				</h3>
+				
+				<ul class="list-unstyled profile-form">
+					<li>
+						<div class="row">
+							<div class="col-sm-12">
+								<label class="main-lable">Planner Name:</label> 
+								<input type="text" ng-model="plannerName" name="plannerName" class="form-control" maxlength="50" required> 
+								<span class="error-msg" ng-if="plannerSubmitted && submitPlanner.plannerName.$error.required">Planner name is required</span>
+								<span class="error-msg" ng-if="(submitPlanner.plannerName.$dirty && submitPlanner.plannerName.$error.maxlength) || (plannerSubmitted && submitPlanner.plannerName.$error.maxlength)">Planner name must not exceed than 50 characters</span>
+							</div>
+					</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-sm-12">
+								<label class="main-lable">Planner End Date:</label>
+									<input type="text" name="curEndDate" class="form-control" datepicker-popup="{{format}}" show-button-bar="false" ng-focus="open($event)" show-weeks="false" ng-model="curEndDate" is-open="mydp.opened" min-date="minDate" max-date="maxDate" required /> 
+								<span class="error-msg" ng-if="plannerSubmitted && submitPlanner.curEndDate.$error.required">Planner end date is required</span>
+							</div>
+					</div>
+					</li>
+					<li>
+						<div class="row">
+							<div class="col-sm-12">
+								<label class="main-lable">Add Your Note:</label>
+								<textarea ng-model="plannerDescription" name="plannerDescription" name="plannerDescription" maxlength="500" class="form-control">{{plannerDescription}}</textarea>
+								<span class="error-msg" ng-if="plannerSubmitted && submitPlanner.plannerDescription.$error.maxlength">Planner detail must not exceed than 500 characters</span>
+							</div>
+					</div>
+					</li>
+					<li>
+						<div class="row">		
+							<div class="col-sm-12">
+			                	<label class="main-lable">Is Active </label>
+				                <div class="btn-group pad-new">
+				                  <label class="btn btn-default" ng-class="{'active':isActive == '1'}">
+				                    <input type="radio"  class="btn btn-default" name="isActive" ng-model="isActive" value="1" />
+				                    <i class="fa-toggle-on"></i> Active</label>
+				                  <label class="btn btn-default" ng-class="{'active':isActive == '0'}">
+				                    <input type="radio"  class="btn btn-default"   name="isActive" ng-model="isActive" value="0" />
+				                    <i class="fa-toggle-off"></i> Inactive </label>
+				                </div>
+			              	</div>
+              
+						</div>
+						<div class="clr"></div>
+					</li>
+					
+				</ul>
+			</div>
+			<!-- Edit form End -->
+			
+		</div><!-- col-sm-4 col-sm-5 End -->
+		
+		<div class="col-md-9 col-sm-8"><!-- col-sm-8 col-sm-7 Start -->
+			<!--Middle content start -->
+			<div class="row common-activities edit-activities">
+			
+				<div class="col-sm-7">
+					<!--.col-sm-7 Start-->
+					
+					<ul class="cbp_tmtimeline">
+
+						<li ng-repeat='timelineList in plannerTimelineList'>
+							<div class="cbp_tmicon timeline-bg-success">
+								<i class="fa-star-o "></i>
+							</div>
+							
+							<div class="cbp_tmlabel  timeline-activitie-list">
+						
+								<accordion>
+						     		<accordion-group is-open="status.open">
+						    			<accordion-heading>
+						    				<h1>
+												<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>  
+												{{timelineList.category}}
+												<p class="fr timing"><i class="fa-clock-o"></i> <input value="{{timelineList.showUserPreferTime}}"name="{{timelineList.plannerActivityId}}"data-maxtime="{{timelineList.showMaxTime}}"data-mintime="{{timelineList.showMinTime}}"id="{{timelineList.plannerActivityId}}" type="text" class="timepicker" /></p>
+												<span class="clr"></span>
+											</h1>
+						          			<div class="activity-discription">{{timelineList.description}} </div>
+						        		</accordion-heading>
+						        		<aside ng-repeat='timelineActivity in timelineList.userActivities'>
+											<h2>
+												<blockquote>
+													{{timelineActivity.action}} 
+													<span class="fr">{{timelineActivity.amount}}
+														<b ng-if="timelineActivity.frequency=='Daily'"> 
+															|| 
+															<span ng-if="timelineActivity.frequencyValue != 0"> Every {{timelineActivity.frequencyValue}} hrs</span>
+															{{timelineActivity.frequency}}
+														</b> 
+														<b ng-if="timelineActivity.frequency=='Weekly'"> 
+															|| 
+															<span>
+																{{timelineActivity.frequency}} {{timelineActivity.frequencyValue}} 
+																<b ng-if="timelineActivity.frequencyValue > '1'">days</b>
+																<b ng-if="timelineActivity.frequencyValue == '1'">day</b>
+															</span>
+														</b>
+													</span>
+												</blockquote>
+											</h2>
+							
+											<p class="planner-discription">{{timelineActivity.description}}</p>
+											<div ng-if="timelineActivity.frequency=='Weekly'">
+												<p class="clr daysCheckBox checkbox-area" data-min="{{timelineActivity.frequencyValue}}">
+													<b class="fl">Select any {{timelineActivity.frequencyValue}} Days:</b> 
+													<label>
+														Mon
+														<input ng-checked="timelineActivity.frequencyValues.indexOf('Monday') > -1" value="Monday" ng-click="checkCount(timelineActivity.frequencyValue,timelineActivity.activityId,timelineActivity.activityId+'_1');" type="checkbox" id="{{timelineActivity.activityId}}_1" name="{{timelineActivity.activityId}}">
+													</label> 
+													<label>
+														Tue 
+														<input ng-checked="timelineActivity.frequencyValues.indexOf('Tuesday') > -1" value="Tuesday" ng-click="checkCount(timelineActivity.frequencyValue,timelineActivity.activityId,timelineActivity.activityId+'_2');" type="checkbox" id="{{timelineActivity.activityId}}_2"  name="{{timelineActivity.activityId}}"></label> <label>Wed
+														<input ng-checked="timelineActivity.frequencyValues.indexOf('Wednesday') > -1" value="Wednesday" ng-click="checkCount(timelineActivity.frequencyValue,timelineActivity.activityId,timelineActivity.activityId+'_3');" type="checkbox" id="{{timelineActivity.activityId}}_3" name="{{timelineActivity.activityId}}">
+													</label> 
+													<label>
+														Thu 
+														<input ng-checked="timelineActivity.frequencyValues.indexOf('Thursday') > -1" value="Thursday" ng-click="checkCount(timelineActivity.frequencyValue,timelineActivity.activityId,timelineActivity.activityId+'_4');" type="checkbox" id="{{timelineActivity.activityId}}_4" name="{{timelineActivity.activityId}}">
+													</label> 
+													<label>
+														Fri
+														<input ng-checked="timelineActivity.frequencyValues.indexOf('Friday') > -1" value="Friday" ng-click="checkCount(timelineActivity.frequencyValue,timelineActivity.activityId,timelineActivity.activityId+'_5');" type="checkbox" id="{{timelineActivity.activityId}}_5" name="{{timelineActivity.activityId}}">
+													</label>
+													<label>
+														Sat 
+														<input ng-checked="timelineActivity.frequencyValues.indexOf('Saturday') > -1" value="Saturday" ng-click="checkCount(timelineActivity.frequencyValue,timelineActivity.activityId,timelineActivity.activityId+'_6');" type="checkbox" id="{{timelineActivity.activityId}}_6" name="{{timelineActivity.activityId}}">
+													</label>
+													<label>
+														Sun
+														<input ng-checked="timelineActivity.frequencyValues.indexOf('Sunday') > -1" value="Sunday" ng-click="checkCount(timelineActivity.frequencyValue,timelineActivity.activityId,timelineActivity.activityId+'_7');" type="checkbox" id="{{timelineActivity.activityId}}_7" name="{{timelineActivity.activityId}}">
+													</label>
+												</p>
+											</div>
+
+
+											<div class="clr"></div>
+										</aside>
+						      		</accordion-group>
+						  		</accordion>
+						
+							</div>
+						</li>
+
+					</ul>
+					<span class="scroll-limit"></span>
+				</div>
+				<!--.col-sm-7 End-->
+		
+				<div class="col-sm-5">
+					<!--.col-sm-5 Start-->
+				
+					<ul class="list-unstyled">
+				 		<li ng-if="plannerGeneralList[0].userActivities.length==0">
+							<div class="common-list general-list">
+								<h1>General Activitie</h1>
+								<aside ng-repeat='generalList in plannerGeneralList[0].userActivities'>
+									<h2>
+										<blockquote>
+											{{generalList.action}} 
+											<span class="fr">
+												{{generalList.amount}}
+												<b ng-if="generalList.frequency=='Daily'"> 
+													|| 
+													<span ng-if="generalList.frequencyValue != '0'"> Every {{generalList.frequencyValue}} hrs</span>
+													{{generalList.frequency}}
+												</b> 
+												<b ng-if="generalList.frequency=='Weekly'"> 
+													||
+													{{generalList.frequency}} 
+													<span> 
+														{{generalList.frequencyValue}} 
+														<b ng-if="generalList.frequencyValue > '1'">days</b>
+														<b ng-if="generalList.frequencyValue == '1'">day</b>
+													</span>
+												</b>
+											</span>
+										</blockquote>
+									</h2>
+									<p class="planner-discription">{{generalList.description}}</p>
+									<div ng-if="generalList.frequency=='Weekly'">
+		
+										<div class="daysCheckBox checkbox-area clr" data-min="{{generalList.frequencyValue}}">
+											<b class="fl"> Select any {{generalList.frequencyValue}} days:</b> 
+											<label>
+												Mon 
+												<input ng-checked="generalList.frequencyValues.indexOf('Monday') > -1" value="Monday" ng-click="checkCount(generalList.frequencyValue,generalList.activityId,generalList.activityId+'_1',1);" type="checkbox" id="{{generalList.activityId}}_1" name="{{generalList.activityId}}">
+											</label>
+											<label>
+												Tue
+												<input ng-checked="generalList.frequencyValues.indexOf('Tuesday') > -1" value="Tuesday" ng-click="checkCount(generalList.frequencyValue,generalList.activityId,generalList.activityId+'_2',2);" type="checkbox" id="{{generalList.activityId}}_2" name="{{generalList.activityId}}">
+											</label> 
+											<label>
+												Wed 
+												<input ng-checked="generalList.frequencyValues.indexOf('Wednesday') > -1" value="Wednesday" ng-click="checkCount(generalList.frequencyValue,generalList.activityId,generalList.activityId+'_3',3);" type="checkbox" id="{{generalList.activityId}}_3" name="{{generalList.activityId}}">
+											</label>
+											<label>
+												Thu
+												<input ng-checked="generalList.frequencyValues.indexOf('Thursday') > -1" value="Thursday" ng-click="checkCount(generalList.frequencyValue,generalList.activityId,generalList.activityId+'_4');" type="checkbox" id="{{generalList.activityId}}_4" name="{{generalList.activityId}}">
+											</label>
+												
+											<label>
+												Fri 
+												<input ng-checked="generalList.frequencyValues.indexOf('Friday') > -1" value="Friday" ng-click="checkCount(generalList.frequencyValue,generalList.activityId,generalList.activityId+'_5');" type="checkbox" id="{{generalList.activityId}}_5" name="{{generalList.activityId}}">
+											</label>
+											<label>
+												Sat
+												<input ng-checked="generalList.frequencyValues.indexOf('Saturday') > -1" value="Saturday" ng-click="checkCount(generalList.frequencyValue,generalList.activityId,generalList.activityId+'_6');" type="checkbox" id="{{generalList.activityId}}_6" name="{{generalList.activityId}}">
+											</label> 
+											<label>
+												Sun 
+												<input ng-checked="generalList.frequencyValues.indexOf('Sunday') > -1" value="Sunday" ng-click="checkCount(generalList.frequencyValue,generalList.activityId,generalList.activityId+'_7');" type="checkbox" id="{{generalList.activityId}}_7" name="{{generalList.activityId}}">
+											</label>
+										</div>
+									</div>
+
+
+									<div class="clr"></div>
+								</aside>
+							</div>
+						</li>
+						
+						<li ng-if="plannerTipsList[0].userActivities.length==0">
+							<div class="common-list tips-list">
+								<h1>Tips</h1>
+								<aside ng-repeat='tipList in plannerTipsList[0].userActivities'>
+									<h2>
+										<blockquote>
+											{{tipList.action}} 
+											<span class="fr">
+												{{tipList.amount}}
+												<b ng-if="tipList.frequency=='Daily'"> 
+													|| 
+													<span ng-if="tipList.frequencyValue != '0'"> Every {{tipList.frequencyValue}} hrs</span> 
+													{{tipList.frequency}}
+												</b> 
+												<b ng-if="tipList.frequency=='Weekly'"> 
+													||
+													{{tipList.frequency}} 
+													<span> 
+														{{tipList.frequencyValue}} 
+														<b ng-if="tipList.frequencyValue > '1'">days</b>
+														<b ng-if="tipList.frequencyValue == '1'">day</b>
+													</span>
+												</b>
+											</span>
+										</blockquote>
+									</h2>
+								
+									<p class="planner-discription">{{tipList.description}}</p>
+									<div ng-if="tipList.frequency=='Weekly'">
+										<p class="clr checkbox-area daysCheckBox" data-min="{{tipList.frequencyValue}}">
+											<label>
+												Mon 
+												<input ng-checked="tipList.frequencyValues.indexOf('Monday') > -1" value="Monday" ng-click="checkCount(tipList.frequencyValue,tipList.activityId,tipList.activityId+'_1');"  type="checkbox" id="{{tipList.activityId}}_1"  name="{{tipList.activityId}}">
+											</label> 
+											<label>
+												Tue 
+												<input ng-checked="tipList.frequencyValues.indexOf('Tuesday') > -1" value="Tuesday" ng-click="checkCount(tipList.frequencyValue,tipList.activityId,tipList.activityId+'_2');" type="checkbox" id="{{tipList.activityId}}_2" name="{{tipList.activityId}}">
+											</label>
+											<label>
+												Wed 
+												<input ng-checked="tipList.frequencyValues.indexOf('Wednesday') > -1" value="Wednesday" ng-click="checkCount(tipList.frequencyValue,tipList.activityId,tipList.activityId+'_3');" type="checkbox" id="{{tipList.activityId}}_3" name="{{tipList.activityId}}">
+											</label>
+											<label>
+												Thu 
+												<input ng-checked="tipList.frequencyValues.indexOf('Thursday') > -1" value="Thursday" ng-click="checkCount(tipList.frequencyValue,tipList.activityId,tipList.activityId+'_4');" type="checkbox" id="{{tipList.activityId}}_4" name="{{tipList.activityId}}">
+											</label> 
+											<label>
+												Fri 
+												<input ng-checked="tipList.frequencyValues.indexOf('Friday') > -1" value="Friday" ng-click="checkCount(tipList.frequencyValue,tipList.activityId,tipList.activityId+'_5');" type="checkbox" id="{{tipList.activityId}}_5" name="{{tipList.activityId}}">
+											</label>
+											<label>
+												Sat 
+												<input ng-checked="tipList.frequencyValues.indexOf('Saturday') > -1" value="Saturday" ng-click="checkCount(tipList.frequencyValue,tipList.activityId,tipList.activityId+'_6');" type="checkbox" id="{{tipList.activityId}}_6" name="{{tipList.activityId}}">
+											</label>
+											<label>
+												Sun 
+												<input ng-checked="tipList.frequencyValues.indexOf('Sunday') > -1" value="Sunday" ng-click="checkCount(tipList.frequencyValue,tipList.activityId,tipList.activityId+'_7');" type="checkbox" id="{{tipList.activityId}}_7" name="{{tipList.activityId}}">
+											</label>
+										</p>
+									</div>
+									<div class="clr"></div>
+								</aside>
+							</div>
+						</li>
+						<li>
+							<div class="common-list tips-list">
+					 			<h1>General Instruction</h1> 
+					  			<aside ng-repeat='generalInstruction in generalInstructions'>
+									<p class="planner-discription">{{generalInstruction}}</p>
+									<div class="clr"></div>
+					 			</aside>
+							</div>
+						</li>
+						<li>
+							<div class="common-list tips-list">
+								<h1>Tips</h1>
+								<aside ng-repeat='tip in tips'>
+									<p class="planner-discription">{{tip}}</p>
+									<div class="clr"></div>
+							 	</aside>
+							</div>
+						</li>
+					</ul>
+				</div>
+			
+				<!--.col-sm-5 End-->
+			</div>
+	
+			<p class="scroll-btn">
+				<input type="submit" name="Savechanges" value="{{loading && 'Please wait...' || 'Save'}}" title="Save" class="btn btn-big fr" ng-click="plannerSubmit()" ng-disabled="loading">
+			</p>
+		
+			<div class="clr"></div>
+		</div><!-- col-sm-8 col-sm-7 End -->
+	</div>
+</form>
+</section>
+
+<!--// Middle content end -->
+<script type="text/javascript">
+ $('body').on('focus', ".timepicker", function(event) {
+	 event.stopImmediatePropagation();
+	 // alert('dsf');
+  var fousObj = $(this);
+  if (!$(this).hasClass('addedTimepicker')) {
+   $(this).timepicker({
+    'minTime' : $(this).attr('data-mintime'),
+    'maxTime' : $(this).attr('data-maxtime'),
+    'step' : 15,
+    'timeFormat' : 'H:i ',
+    'show2400' : true,
+    'orientation' : 'l'
+   });
+   $(this).on('timeRangeError', function(obj1, obj2) {
+    // do some stuff to alert the user
+    fousObj.val('');
+    $('.top-right').notify({
+     message : {
+      text : "Selected time is invalid."
+     },
+     type : "danger",
+     fadeOut : {
+      enabled : true,
+      delay : 3000
+     }
+    }).show();
+   });
+   $(this).on('timeFormatError', function(obj1, obj2) {
+    // do some stuff to alert the user
+    fousObj.val('');
+    $('.top-right').notify({
+     message : {
+      text : "Time format is invalid."
+     },
+     type : "danger",
+     fadeOut : {
+      enabled : true,
+      delay : 3000
+     }
+    }).show();
+   });
+   $(this).addClass('addedTimepicker');   
+  }
+ });
+$(document).click(function(){ 
+ $('.timing').click(function(event){
+	    event.stopImmediatePropagation();
+	    //alert('working...:)');
+	});
+});
+</script>
+

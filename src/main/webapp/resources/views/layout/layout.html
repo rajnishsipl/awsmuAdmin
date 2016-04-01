@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" ng-app="awsmuApp">
+	<head>
+		<title>Admin</title>
+		<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon">
+		<script src="resources/js/properties.js"></script>
+		<script type="text/javascript">
+			document.write('<link href="resources/css/bootstrap.min.css?'+Math.random()+'" rel="stylesheet" type="text/css">');
+			document.write('<link href="resources/css/style.css?'+Math.random()+'" rel="stylesheet" type="text/css">');
+			document.write('<link href="resources/css/nya-bs-select.css?'+Math.random()+'" rel="stylesheet" type="text/css">');
+			document.write('<link href="resources/css/jasny-bootstrap.css?'+Math.random()+'" rel="stylesheet" type="text/css">');
+			document.write('<link href="resources/fonts/fontawesome/css/font-awesome.min.css?'+Math.random()+'" rel="stylesheet" type="text/css">');
+		</script>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+		<script src="resources/js/jquery-2.0.3.min.js"></script>
+		<script src="resources/js/bootstrap.min.js"></script>
+		<script src="resources/js/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-sanitize.min.js"></script>
+		<script src="resources/js/angular-route.min.js"></script>
+		<script src="resources/js/ngStorage.js"></script>
+		<script src="resources/js/ui-bootstrap-tpls-0.13.4.min.js"></script>
+		<script src="resources/js/bootstrap-datepicker.js"></script>
+		<script src="resources/js/jquery.timepicker.min.js"></script>
+		  
+		<!-- Jq grid plugin files start -->	
+		<link rel="stylesheet" href="resources/plugins/Jqgrid/css/jqGrid.css" />
+		<link rel="stylesheet" href="resources/plugins/Jqgrid/css/jqGridCustom.css" />		
+		<script src="resources/plugins/Jqgrid/js/grid.locale-en.js"></script>
+		<script src="resources/plugins/Jqgrid/js/jquery.jqGrid.min.js"></script>
+		<!-- jq grid plugin files end -->
+		<link href="resources/css/jquery.timepicker.css" rel="stylesheet" type="text/css"/>
+		<!-- emoji plugin files start -->
+		<link rel="stylesheet" href="resources/plugins/emojis/jquery.emojiarea.css">
+		<script type="text/javascript" src="resources/plugins/emojis/jquery.emojiarea.js"></script>
+		<script type="text/javascript" src="resources/plugins/emojis/emojis.js"></script>
+		<!-- emoji plugin files end -->
+		
+		
+		<script src="resources/js/bootboxjs.js"></script> <!-- bootboxjs For bootstrap lightbox -->
+		<script src="resources/js/bootstrap-notify.js"></script> <!-- bootstrap-notify For bootstrap alert messages -->
+		<script src="resources/js/nya-bs-select.min.js"></script> <!-- nya-bs-select.min For bootstrap alert messages -->
+		
+		<!-- ng-img-crop plugin For Image Crop -->
+		<link rel="stylesheet" href="resources/plugins/imgcrop/ng-img-crop.css" />
+		<script src="resources/plugins/imgcrop/ng-img-crop.js"></script>
+		
+		<!-- action chart js -->
+		<script type="text/javascript" src="resources/plugins/charts/c3.min.js"></script>
+		<script src="resources/plugins/charts/d3.v3.min.js" charset="utf-8"></script>
+		<script src="resources/js/angular-drag-and-drop-lists.min.js"></script>
+		<script>
+		    //optional need to be loaded before angular-file-upload-shim(.min).js 
+		    FileAPI = {
+		        //only one of jsPath or jsUrl. 
+		        jsUrl: "resources/plugins/fileupload/FileAPI.min.js",
+		        
+		        //only one of staticPath or flashUrl. 
+		        flashUrl: "resources/plugins/fileupload/FileAPI.flash.swf",
+		 
+		        //forceLoad: true, html5: false //to debug flash in HTML5 browsers 
+		    }
+		</script>
+		<script type="text/javascript" src="resources/plugins/fileupload/ng-file-upload-shim.js"></script>
+		<script type="text/javascript" src="resources/plugins/fileupload/ng-file-upload.js"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+		<base href="/admin/">
+		
+		
+		<script type="text/javascript">
+			document.write('<scr'+'ipt src="resources/apps/awsmuApp.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/services/generalServices.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+		</script>
+		
+		<!--Ng  controllers start-->
+		<script type="text/javascript">
+			document.write('<scr'+'ipt src="resources/controllers/loginController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/dashboardController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/usersController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/celebritiesController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/activitiesController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/plannerController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/postsController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/userDoctorController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/bookletController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/postCommentController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/postLikeController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/problemsController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/activityCategoriesController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/trendsController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/tipsController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/attributesController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/doctorController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/questionsController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/messageController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/plannerGroupController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			document.write('<scr'+'ipt src="resources/controllers/connectionsController.js?'+Math.random()+'" type="text/javascript"></scr'+'ipt>');
+			</script>
+		<!--Ng  controllers end -->
+	</head>
+	<body>
+	<div class="notifications-alerts top-right"></div>
+	
+  	<div class="mid-content" ng-view></div>
+  	<footer>
+  	 <p class="copyright-txt align-center">Copyright &copy; AwsmU.</p>
+  	</footer>
+	</body>
+</html>

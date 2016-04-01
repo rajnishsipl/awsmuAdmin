@@ -1,0 +1,49 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+<section class="container">
+  <div class="row"><!--row Start-->
+     <div class="col-md-9"><!--col-md-12 Start-->
+      <form ng-submit="submitPostCommentEdit()" class="userform-bg" name="postCommentForm" novalidate>
+      	<ul class="list-unstyled profile-form">
+      	<li>
+            <h3 class="section-title">Comment By</h3>
+            <div class="row">
+            	<div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">User ID</label>
+                <label><a ng-href="#/userView/{{postCommentDetail.user.userId}}">{{postCommentDetail.user.userId}}</a></label>                
+              </div><!-- col-md-4 End-->
+              <div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">User Name</label>
+                <label>{{postCommentDetail.user.displayName}} <span ng-show="postCommentDetail.user.userInfo!=''">({{postCommentDetail.user.userInfo}})</span></label>
+              </div><!-- col-md-4 End-->
+               <div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">User Role</label>                
+                <label>{{postCommentDetail.user.userRole}}</label>
+              </div><!-- col-md-4 End-->                             
+            </div>
+          </li>    
+          <li>
+          	<div class="row">
+              <div class="col-lg-12 col-md-12 "><!-- col-md-4 Start ng-bind-html-->
+              <div class="emoji-icon">
+                <label class="main-lable">Post Comment</label>
+                <textarea placeholder="Post Comment" class="form-control" id="commentContent" name="commentContent" ng-model="postCommentDetail.commentContent"required></textarea>
+                <span class="error-msg" ng-if="postCommentSubmitted && postCommentForm.postCommentSubmitted.$error.required">Post comment is required</span>
+				<span class="error-msg" ng-if="errorMap.commentContent!=null">{{errorMap.commentContent}}</span>
+				</div>
+              </div><!-- col-md-4 End-->               
+            </div>
+          </li>
+          <li>
+          	<div class="row">
+              <div class="col-lg-6 col-md-6"><!-- col-md-4 Start-->
+              <input type="submit" value="{{attrloading && 'Please wait...' || 'Save'}}" class="btn"  id="postCommentSubmitted" ng-disabled="attrloading">
+             
+              <input type="button" value="Cancel" class="btn-danger btn" ng-click="cancel()" />
+              </div>
+             </div>
+          </li>
+         </ul>
+        </form>
+     </div><!--col-md-12 End-->
+  </div><!--row End-->
+</section>

@@ -1,0 +1,53 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+<section class="container">
+<div class="row">
+<!--row Start-->
+<div class="col-md-12"><!-- col-md-12 Start -->
+  <h1 class="page-title"><a ng-href="#bookletsList" class="fl btn btn-sm btn-success" title="Back to Booklets List"><i class="fa fa-angle-double-left"></i> Back to Booklets List </a>Booklet Detail<span class="clr"></span></h1>
+</div>
+<div class="col-md-12"><!-- col-md-12 Start -->
+  <table class="table discribtion-table mrg-btn table-bordered">
+    <thead>
+     <tr>
+      <th>ID</th>
+      <th>User ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>File Type</th>
+      <th>Is Deleted</th>
+      <th>Is Active</th>
+      <th>Created Date</th>
+      <th>Updated Date</th>
+     </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><p class="">{{bookletDetail._id}}</p></td>
+        <td><p class="">{{bookletDetail.userId}}</p></td>
+        <td><p class="">{{bookletDetail.title}}</p></td>
+        <td><p class="">{{bookletDetail.description}}</p></td>
+        <td><p class="">{{bookletDetail.fileType}}</p></td>
+        <td>
+         <p class="">
+          <span ng-if="bookletDetail.isDeleted == 1">Yes</span>
+    	  <span ng-if="bookletDetail.isDeleted != 1">No</span>
+		 </p>
+	    </td>
+	    <td>
+         <p class="">
+          <span ng-if="bookletDetail.isActive == 1">Yes</span>
+    	  <span ng-if="bookletDetail.isActive != 1">No</span>
+		 </p>
+	    </td>
+	    <td><p class="">{{bookletDetail.createdDate}}</p></td>
+	    <td><p class="">{{bookletDetail.updatedDate}}</p></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="download-btn">
+   <h3>Download File</h3>
+    <a ng-href="{{bookletDetail.fileUrl}}" title="Click to Download File" target="_self"><i class="fa fa-download"></i></a>
+  </div>
+</div>
+</section>

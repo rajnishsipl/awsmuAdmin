@@ -1,0 +1,132 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+<section class="container">
+  <div class="row"><!--row Start-->
+  
+  <div class=" col-md-3">
+  	<div class="profile-img-section margin-btm-none">
+	  <div class="expert-img">
+		<div class=" profile-img">    
+		    <img alt="Profile Pic" ng-src="{{postDetail.user.image}}"  />
+		    <!-- <span class="expert-txt-big" tooltip-placement="top" tooltip="AwsmU Expert"></span> -->
+	    </div> 
+	    </div> 
+	    
+	    <h1 class="profile-name">{{postDetail.user.displayName}}</h1>
+
+	   <h4>{{postDetail.user.userInfo}}</h4>	   
+		  <p ng-if="userDetail.facebookUrl || userDetail.twitterUrl || userDetail.linkedInUrl" class="social-links"> 
+	         <a title="Facebook" ng-href="{{userDetail.facebookUrl}}" target="_blank"><i class="fa fa-facebook"></i></a>            
+	         <a title="Twitter" ng-href="{{userDetail.twitterUrl}}" target="_blank"><i class="fa fa-twitter"></i></a>
+	         <a title="LinkedIn" ng-href="{{userDetail.linkedInUrl}}" target="_blank"><i class="fa fa-linkedin"></i></a>
+	      </p>
+	     
+	</div> 
+	<ul class="side-nav list-unstyled">
+	  <li><a ng-href="#/userView/{{postDetail.user.userId}}" ><i class="fa fa-user"></i> Profile</a></li>
+	  <li><a ng-href="#/userEdit/{{postDetail.user.userId}}" target="_self" ><i class="fa fa-pencil-square-o"></i> Edit Profile</a></li>
+	  <li><a ng-href="#/posts/{{postDetail.user.userId}}" target="_self" ><i class="fa  fa-list"></i> Posts List</a></li>
+	  <li><a ng-href="#/plannerView/{{postDetail.user.userId}}" target="_self" ><i class="fa  fa-sticky-note-o"></i> User Planner</a></li>
+	  <li><a ng-href="#/plannerList/{{postDetail.user.userId}}" target="_self" ><i class="fa  fa-calendar-check-o"></i> Planner List</a></li>
+	    </ul>
+  </div>
+  
+     <div class="col-md-9"><!--col-md-12 Start-->
+      <form ng-submit="submitPostEdit()" class="userform-bg" name="postForm" novalidate>
+      	<ul class="list-unstyled profile-form">
+          <li>
+            <h3 class="section-title">Post By</h3>
+            <div class="row">
+            	<div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">User ID</label>
+                <label class="main-lable"><b><a ng-href="#/userView/{{postDetail.user.userId}}">{{postDetail.user.userId}}</a></b></label>                
+              </div><!-- col-md-4 End-->
+              <div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">User Name</label>
+                <label class="main-lable"><b>{{postDetail.user.displayName}} <span ng-show="postDetail.user.userInfo!=''">({{postDetail.user.userInfo}})</span></b></label>
+              </div><!-- col-md-4 End-->
+               <div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">User Role</label>                
+                <label class="main-lable"><b>{{postDetail.user.userRole}}</b></label>
+              </div><!-- col-md-4 End-->
+                             
+            </div>
+          </li>
+
+          <li>
+            <h3 class="section-title">Post Information</h3>
+            <div class="row">
+              <div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">Post ID</label>
+                <label class="main-lable"><b><a ng-href="#/postView/{{postDetail._id}}">{{postDetail._id}}</a></b></label>                
+              </div><!-- col-md-4 End-->
+               
+               <div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">Post Planner Group</label>
+                <label class="main-lable"><b>{{postDetail.postFor.typeTitle}}</b></label>                
+              </div><!-- col-md-4 End-->
+               <div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">Post Type</label>
+                <label class="main-lable"><b>{{postDetail.postFor.type}}</b></label>                
+              </div><!-- col-md-4 End-->    
+            </div> 
+          </li>
+          <li>
+          	<div class="row">
+          	<div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">Posted Date</label>
+                <label class="main-lable"><b>{{postDetail.createdDate}}</b></label>
+                <!-- <input type="text" placeholder="Posted Date" class="form-control" readonly="readonly" name="Posted Date" ng-model="postDetail.createdDate" ng-maxlength="100" required> -->
+              </div><!-- col-md-4 End-->
+              <div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">Last Update Date</label>
+                <label class="main-lable"><b>{{postDetail.updatedDate}}</b></label>
+              </div><!-- col-md-4 End-->
+            </div>
+          </li>
+          <li>
+            <div class="row">
+                <div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">Trend Title</label>
+            <ol class="nya-bs-select clr" ng-model="trendTitle" data-live-search="true">
+				<li nya-bs-option="option in trendsList" data-value="option.title">
+					<a><span><img alt="{{option.title}}" ng-src="{{imageUrl}}icon/{{option.icon}}" /> {{option.title}}</span></a>
+				</li>
+			</ol>
+			<span class="error-msg" ng-if="postSubmitted && postForm.trendTitle.$error.required">Please select trend</span>
+				<span class="error-msg" ng-if="errorMap.trendTitle!=null">{{errorMap.trendTitle}}</span>
+           </div><!-- col-md-4 End-->   
+              <div class=" col-md-4 "><!-- col-md-4 Start-->
+                <label class="main-lable">Is Active </label>
+                <div class="btn-group pad-new">
+                  <label class="btn btn-default" ng-class="{'active':postDetail.isActive == '1'}">
+                    <input type="radio"  class="btn btn-default" name="active" ng-model="postDetail.isActive" value="1" />
+                    <i class="fa-toggle-on"></i> Active</label>
+                  <label class="btn btn-default" ng-class="{'active':postDetail.isActive == '0'}">
+                    <input type="radio"  class="btn btn-default"   name="inactive" ng-model="postDetail.isActive" value="0" />
+                    <i class="fa-toggle-off"></i> Inactive </label>
+                </div>                
+              </div><!-- col-md-4 End-->
+            </div>
+          </li>
+          <li>
+          	<div class="emoji-icon">
+
+                <label class="main-lable">Post Content</label>
+                <textarea placeholder="Post Content" class="form-control" id="postContent" name="postContent" ng-model="postDetail.postContent" ng-model="postDetail.postContent" required></textarea>
+                <span class="error-msg" ng-if="postSubmitted && postForm.postContent.$error.required">Post is required</span>
+				<span class="error-msg" ng-if="errorMap.postContent!=null">{{errorMap.postContent}}</span>
+              
+            </div>
+          </li>
+          <li>
+          	<div class="row">
+              <div class="col-lg-12 col-md-12 "><!-- col-md-4 Start-->
+              <input type="submit" value="{{attrloading && 'Please wait...' || 'Save'}}" class="btn"  id="postSubmitted" ng-disabled="attrloading">
+              </div>
+             </div>
+          </li>
+         </ul>
+        </form>
+     </div><!--col-md-12 End-->
+  </div><!--row End-->
+</section>

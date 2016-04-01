@@ -1,0 +1,17 @@
+
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--container Start-->
+		<div class="post-info-rightsection "> 
+   			<h3 class="section-title">Degree Courses Details 
+   			<span class="fr">
+   			<a class="btn btn-sm btn-success" ng-href ="#/attributesdegreeCoursesEdit/{{degreeCourses._id}}"><i class="fa fa-edit"></i> Edit</a>  <b> </b>  <a class="btn btn-sm btn-warning" ng-href ="#/attributes"><i class="fa fa-th-list"></i> Attributes  List</a>
+   			</span></h3>
+	         
+	         <label class="label label-default label-margin" ng-repeat="degreeCourse in degreeCourses.value" >
+	            {{degreeCourse}}
+	         </label>
+	         
+	    </div>
+	</div>
+	
+

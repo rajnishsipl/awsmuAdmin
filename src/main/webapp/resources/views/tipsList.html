@@ -1,0 +1,8 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	
+	<div class="container" id="main">  
+	<h1 class="page-title">Tips List 
+	 <a ng-href="#tipsAdd" class="btn btn-sm btn-danger fr" title="Add New Tip"><i class="glyphicon glyphicon-plus"></i> Add New Tip</a>
+	</h1>
+    	<ng-jqgrid config="config" addnew="true" modeldata="tipsdata" gridid="tipsGrid" pagerid="tipsPager" api="gridapi"></ng-jqgrid>       
+  	</div>

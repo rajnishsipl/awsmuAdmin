@@ -1,0 +1,191 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--row Start-->
+		<div class=" post-info-rightsection "> 
+		<h3 class="section-title">Edit Activity 
+		<span class="fr"><a class="btn btn-sm btn-success" ng-href ="#/activitiesView/{{activity._id}}"><i class="fa fa-search"></i> View Activity</a> <b> </b> <a class="btn btn-sm btn-warning" ng-href ="#/activities"><i class="fa fa-th-list"></i> Activities List</a></span>
+		</h3>
+		
+			<form name="activityForm" novalidate> 
+			 <ul class="list-unstyled profile-form">
+	          <li>
+	            <div class="row"><!--row Start-->
+	              <div class="col-lg-6 col-md-6 col-sm-6">
+		             <label class="main-lable">Category Name</label>
+		              <ol class="nya-bs-select clr" name="category" ng-model="activity.category" required>
+	                  <li nya-bs-option="activity in activitiesCategoriesList | orderBy"> <a> <span>{{ activity }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+	                </ol>
+		            <span class="error-msg" ng-if="activitySubmitted && activityForm.category.$error.required">Category is required</span>
+					 <span class="error-msg" ng-if="errors.category">{{errors.category}}</span>
+				  </div>
+				  <div class="col-lg-6 col-md-6 col-sm-6">
+                 <label class="main-lable">Problems Name</label> 
+	              
+	              <ol class="nya-bs-select clr" name="problems" ng-model="activity.problems" required multiple>
+                    <li nya-bs-option="problem in problemList| orderBy"> <a> <span>{{ problem }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                  </ol>
+	              <span class="error-msg" ng-if="activitySubmitted && activityForm.problems.$error.required">Problem is required</span>
+				  <span class="error-msg" ng-if="errors.problems">{{errors.problems}}</span>
+          		 </div>
+          		 
+				</div>
+				</li>
+				<li>
+				 <div class="row"><!--row Start-->
+				  <div class="col-lg-6 col-md-6 col-sm-6">
+          		  <label class="main-lable">Action </label> 
+				  <textarea rows="" cols="" placeholder="Add Action for activity" class="form-control" name="action" ng-model="activity.action" maxlength="500" required >
+				  </textarea>
+				<span class="error-msg" ng-if="activitySubmitted && activityForm.action.$error.required">Action is required</span>
+				<span class="error-msg" ng-if="activitySubmitted && activityForm.action.$error.maxlength">Action should not exceed than 500 characters</span> 
+				<span class="error-msg" ng-if="errors.action">{{errors.action}}</span>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+				 	<label class="main-lable">Description </label> 
+					<textarea rows="" cols="" placeholder="Add description for activity" class="form-control" name="description" ng-model="activity.description" maxlength="500" >
+					</textarea>
+					<span class="error-msg" ng-if="activitySubmitted && activityForm.description.$error.maxlength">Description should not exceed than 500 characters</span> 
+					<span class="error-msg" ng-if="errors.description">{{errors.description}}</span>
+				</div>
+				 </div>
+				</li>
+				<li>
+				<div class="row"><!--row Start-->
+				  <div class="col-lg-3 col-md-4 col-sm-6">
+				  	<label class="main-lable">Amount</label> 
+					<input type="text" placeholder="Amount" class="form-control" name="amount" ng-model="activity.amount" ng-maxlength="200">
+					<span class="error-msg" ng-if="activitySubmitted && activityForm.amount.$error.required">Action is required</span>
+					<span class="error-msg" ng-if="activitySubmitted && activityForm.amount.$error.maxlength">Amount should not exceed than 200 characters</span> 
+					<span class="error-msg" ng-if="errors.amount">{{errors.amount}}</span>
+				  </div>
+				  <div class="col-lg-3 col-md-4 col-sm-6">
+				  	<label class="main-lable">Frequency</label> 
+					<input type="text" placeholder="Frequency" class="form-control" name="frequency" ng-model="activity.frequency" ng-maxlength="200">
+					<span class="error-msg" ng-if="activitySubmitted && activityForm.frequency.$error.maxlength">Frequency should not exceed than 200 characters</span> 
+					<span class="error-msg" ng-if="errors.frequency">{{errors.frequency}}</span>
+				  </div>
+				  <div class="col-lg-3 col-md-4 col-sm-6">
+				  	<label class="main-lable">Minimum Time</label> 
+					<input type="text" placeholder="Min Time" class="timepicker form-control" name="minTime" ng-model="activity.minTime" >
+					<span class="error-msg" ng-if="activitySubmitted && activityForm.minTime.$invalid"> Minimum time is invalid</span> 
+					<span class="error-msg" ng-if="errors.minTime">{{errors.minTime}}</span>
+				  </div>
+				  <div class="col-lg-3 col-md-4 col-sm-6">
+				  	<label class="main-lable">Maximum Time</label> 
+					<input type="text" placeholder="Max Time" class="timepicker form-control" name="maxTime" ng-model="activity.maxTime">
+					<span class="error-msg" ng-if="activitySubmitted && activityForm.maxTime.$invalid"> Maximum time is invalid</span> 
+					<span class="error-msg" ng-if="errors.maxTime">{{errors.maxTime}}</span>
+				  </div>
+				 </div>
+				</li>
+				<li>
+				<div class="row"><!--row Start-->
+				  <div class="col-lg-3 col-md-4 col-sm-6">
+				  	<label class="main-lable">Minimum Age</label> 
+					<input type="text" placeholder="Min Age" class="form-control" name="minAge" ng-model="activity.minAge" ng-pattern="/^[0-9]{1,2}$/">
+					<span class="error-msg" ng-if="activitySubmitted && activityForm.minAge.$invalid">Minimum age is invalid</span> 
+					<span class="error-msg" ng-if="errors.minAge">{{errors.minAge}}</span>
+				  </div>
+				  <div class="col-lg-3 col-md-4 col-sm-6">
+				  	<label class="main-lable">Maximum Age</label> 
+					<input type="text" placeholder="Max Age" class="form-control" name="maxAge" ng-model="activity.maxAge" ng-pattern="/^[0-9]{1,2}$/"/>
+					<span class="error-msg" ng-if="activitySubmitted && activityForm.maxAge.$invalid">Maximum age is invalid</span> 
+					<span class="error-msg" ng-if="errors.maxAge">{{errors.maxAge}}</span>
+				  </div>
+				  <div class="col-lg-3 col-md-4 col-sm-6">
+				  	<label class="main-lable">Nationality</label>
+	                <ol class="nya-bs-select clr" name="nationality" ng-model="activity.nationality">
+	                  <li nya-bs-option="nationalityName in nationalityList | orderBy"> <a> <span>{{ nationalityName }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+	                </ol>
+				  </div>
+				  <div class="col-lg-3 col-md-4 col-sm-6">
+                 	<label class="main-lable">Gender</label>
+             		<div class="btn-group pad-new">
+                     <label class="btn btn-default" ng-class="{'active':activity.gender == 'Male'}">
+                     <input type="radio"  class="btn btn-default" id="q158" name="activity.gender" ng-model="activity.gender" value="Male" />
+                     <i class="fa-male"></i> Male</label>
+                    <label class="btn btn-default" ng-class="{'active':activity.gender == 'Female'}">
+                     <input type="radio"  class="btn btn-default"  id="q159"  name="gender" ng-model="activity.gender" value="Female" />
+                     <i class="fa-female"></i> Female </label>
+                 	</div>
+                 </div>
+                </div>
+				</li>
+				<li>
+				 <div class="row"><!--row Start-->
+				  <div class="col-lg-3 col-md-4 col-sm-6">
+                 	<label class="main-lable">Is Active</label>
+             		<div class="btn-group pad-new">
+                     <label class="btn btn-default" ng-class="{'active':activity.isActive == 1}">
+                     <input type="radio"  class="btn btn-default" id="q158" name="isActive" ng-model="activity.isActive" value="1" />
+                     <i class="fa-male"></i> Yes</label>
+                    <label class="btn btn-default" ng-class="{'active':activity.isActive == 0}">
+                     <input type="radio"  class="btn btn-default"  id="q159"  name="gender" ng-model="activity.isActive" value="0" />
+                     <i class="fa-female"></i> No </label>
+                 	</div>
+               </div>
+				  </div>
+				  
+				</li>
+				</ul>
+				<input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Update'}}" ng-click="updateActivitySubmit()" ng-disabled="loading">
+	           </form> 
+		    
+	    </div>
+	</div>
+	
+<script type="text/javascript">
+<!--
+
+//-->
+$('body').on('focus', ".timepicker", function() {
+		var fousObj = $(this);
+		if (!$(this).hasClass('addedTimepicker')) {
+			$(this).timepicker({
+				'step' : 30,
+				'timeFormat' : 'H:i ',
+				'show2400' : true,
+				'orientation' : 'l'
+			});
+
+			$(this).on('timeRangeError', function(obj1, obj2) {
+				// do some stuff to alert the user
+				fousObj.val('');
+				$('.top-right').notify({
+					message : {
+						text : "Selected time is invalid."
+					},
+					type : "danger",
+					fadeOut : {
+						enabled : true,
+						delay : 3000
+					}
+				}).show();
+			});
+			$(this).on('timeFormatError', function(obj1, obj2) {
+				// do some stuff to alert the user
+				fousObj.val('');
+				$('.top-right').notify({
+					message : {
+						text : "Time format is invalid."
+					},
+					type : "danger",
+					fadeOut : {
+						enabled : true,
+						delay : 3000
+					}
+				}).show();
+			});
+			$(this).addClass('addedTimepicker');
+			//alert(1);
+		}
+
+	});
+
+
+	/* $'#maxTime').on('timeFormatError', function(obj1, obj2) {
+		// do some stuff to alert the user
+		alert("sss");
+		
+	}); */
+
+</script>

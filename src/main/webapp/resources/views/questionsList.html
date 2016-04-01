@@ -1,0 +1,8 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	
+	<div class="container" id="main">  
+	<h1 class="page-title">Questions List 
+	 <a ng-href="#questionsAdd" class="btn btn-sm btn-danger fr" title="Add New Questions"><i class="glyphicon glyphicon-plus"></i> Add New Questions</a>
+	</h1>
+    	<ng-jqgrid config="config" addnew="true" modeldata="questionsdata" gridid="questionsGrid" pagerid="questionsPager" api="gridapi"></ng-jqgrid>       
+  	</div>

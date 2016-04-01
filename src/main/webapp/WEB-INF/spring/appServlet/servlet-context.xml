@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean> -->
+	
+	<context:component-scan base-package="com.awsmu.controller" />
+	<context:component-scan base-package="com.awsmu.service" />
+	<context:component-scan base-package="com.awsmu.dao" />
+	<context:component-scan base-package="com.awsmu.exception" />
+	<!--   
+	<interceptors>
+		<beans:bean class="com.awsmu.interceptor.GreetingInterceptor" ></beans:bean>
+		<interceptor>
+			<mapping path="/AnimalList" />
+			<beans:bean class="com.awsmu.interceptor.AnimalInterceptor" ></beans:bean>
+		</interceptor>
+	</interceptors>
+	 -->
+	<!-- <interceptors>
+    <beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+    <interceptor>
+        <mapping path="/secure/*"/>
+        <beans:bean class="com.awsmu.interceptor.GreetingInterceptor" />
+    </interceptor>
+</interceptors> -->
+	
+	<!-- Gson bean -->
+	<beans:bean id="gson" class="com.google.gson.Gson"/>
+	<!-- Gson bean -->
+	
+	<!-- mongoDB connection -->
+	<beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <beans:constructor-arg name="mongo" ref="mongo"/>
+        <beans:constructor-arg name="databaseName" value="#{mongoURI.database}"/>
+        <beans:constructor-arg name="userCredentials" ref="mongoCredentials"/>
+    </beans:bean>
+	
+	<beans:bean id="mongoCredentials" class="org.springframework.data.authentication.UserCredentials">
+	     <beans:constructor-arg name="username" value="#{mongoURI.username}" />
+	    <beans:constructor-arg name="password" value="#{new java.lang.String(mongoURI.password)}" />
+	</beans:bean>
+    
+    <!-- 
+    	Localhost configuration bean -->
+    <beans:bean id="mongoURI" class="com.mongodb.MongoURI">
+	  <beans:constructor-arg value="mongodb://devAwsmu:123456@10.10.10.62:27017/heathcare_db"/>
+	</beans:bean>
+	<!-- Rackspace server configuration bean -->
+	<!-- <beans:bean id="mongoURI" class="com.mongodb.MongoURI">
+	  <beans:constructor-arg value="mongodb://healthcare_dev:health$care@712ece608f7e17cedffb71f0535fe00e/iad-c17-0.objectrocket.com:49020,iad-c17-1.objectrocket.com:49020/heathcare_db"/>
+	</beans:bean> -->
+
+    <beans:bean id="mongo" class="com.mongodb.Mongo">
+        <beans:constructor-arg ref="mongoURI" />
+    </beans:bean>
+	<!--// mongoDB connection -->
+	
+	<!-- File upload -->
+  	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />  
+  	<!-- File upload end -->
+  
+</beans:beans>

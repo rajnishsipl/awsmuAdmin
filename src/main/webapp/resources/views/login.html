@@ -1,0 +1,37 @@
+<div class="Login-Container">
+  <h1 class="page-logo text-center"><img width="200" ng-src="{{constant.imageUrl}}logo.png" alt="Awsmu" /></h1>
+   <div class="loginform">
+    <section class="page-wrapper">
+     <div class="login-heading">Admin Login</div>
+     <form name="loginForm" id="loginForm" novalidate >
+	   
+	   <ul class="list-unstyled">
+	   <div  class="errorMessage alert alert-danger alert-dismissible" ng-if="invaalidLogin" role="alert"><button type="button" class="close" data-hide="alert"  aria-hidden="true" data-dismiss="alert" aria-label="Close"><span >&times;</span></button> <p>{{invaalidLogin}}</p></div>
+	    <li>
+	     <div class="input-group input-group-sm input-group-minimal">
+	      <span class="input-group-addon"><i class="fa fa-user"></i></span>
+	      <input type="email" class="form-control" name="loginEmail" ng-model="loginEmail" ng-maxlength="250" required placeholder="Email" >
+	     </div> 
+          <span class="error-msg" ng-if="loginSubmitted && loginForm.loginEmail.$error.required">Email is required</span> 
+          <span class="error-msg" ng-if="loginSubmitted && loginForm.loginEmail.$error.email">Invalid email address</span> 
+          <span class="error-msg" ng-if="loginSubmitted && loginForm.loginEmail.$error.maxlength">Email must not exceed than 250 characters</span>
+	    </li>
+	    <li>
+	    <div class="input-group input-group-sm input-group-minimal">
+	      <span class="input-group-addon"><i class="fa fa-key"></i></span>
+	      <input type="password" class="form-control" name="loginPassword" value="" placeholder="Password" ng-model="loginPassword" ng-maxlength="16" ng-minlength="4" required>
+	      </div>
+	      <span class="error-msg" ng-if="loginSubmitted && loginForm.loginPassword.$error.required">Password is required</span> 
+	      <span class="error-msg" ng-if="loginSubmitted && loginForm.loginPassword.$error.maxlength">Password must not exceed than 16 characters</span> 
+	      <span class="error-msg" ng-if="loginSubmitted && loginForm.loginPassword.$error.minlength">Password must be at least 4 of characters</span>
+	    </li>
+	    <li>
+          <!-- <a href="#forgot" class="p-20x" title="Forgot Password">Forgot Password</a>  --><input class="btn fr" type="submit" title="Log In" value="Log In" ng-click="login()" id="loginSubmit" />
+          <div class="clr"></div> 
+        </li>
+	   </ul>
+     </form>
+     </section>
+   </div>
+  
+</div>

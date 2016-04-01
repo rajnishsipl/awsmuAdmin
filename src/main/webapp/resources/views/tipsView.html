@@ -1,0 +1,48 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--container Start-->
+		<div class="post-info-rightsection "> 
+   			<h3 class="section-title">Tip Details 
+   			<span class="fr">
+   			<a class="btn btn-sm btn-success" ng-href ="#/tipsEdit/{{tip._id}}"><i class="fa fa-edit"></i> Edit</a>  <b> </b>  <a class="btn btn-sm btn-warning" ng-href ="#/tips"><i class="fa fa-th-list"></i> Tip List</a>
+   			</span></h3>
+	         <p class="info-field">
+	             <label class="main-label">Tip Title</label>{{tip.tipTitle}}
+	         </p>
+	         
+	         <p class="info-field">
+	             <label class="main-label">Tip Text</label>{{tip.tipText}}
+	         </p>
+	         
+			<p class="info-field">   
+                 <label class="main-label">Problems Name</label> <u ng-repeat="problem in tip.problemNames">{{problem}}{{$last ? '' : ', '}}</u>
+             </p>  
+			
+			 <p class="info-field">
+	             <label class="main-label">Gender  </label>{{tip.gender}}
+	         </p>
+			 <p class="info-field">
+	             <label class="main-label">Age </label>{{tip.age}}
+	         </p>
+			<p class="info-field">
+	             <label class="main-label">Nationality </label>{{tip.nationality}}
+	        </p>
+			<p class="info-field">
+	             <label class="main-label">Profession </label>{{tip.profession}}
+	        </p>
+			
+			
+            <p class="info-field"> 
+ 				<label class="main-label">Is Active</label> <span ng-if="tip.isActive=='0'" >No</span><span ng-if="tip.isActive=='1'" >Yes</span>
+ 			</p>	
+         	
+         	<p class="info-field"> 
+ 				<label class="main-label">Created Date</label> {{tip.createdDate}}
+ 			</p>
+ 			
+ 			<p class="info-field"> 
+ 				<label class="main-label">Updated Date</label> {{tip.updatedDate}}
+ 			</p>
+	    </div>
+	</div>
+	
+

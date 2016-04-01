@@ -1,0 +1,40 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+<div class="container"><!--row Start-->
+  <div class=" post-info-rightsection ">
+    <h3 class="section-title">Add Trend </h3>
+    <form name="trendForm" novalidate>
+      <ul class="list-unstyled profile-form">
+        <li>
+          <div class="row"><!--row Start-->
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <label class="main-lable">Trend Title</label>
+              <input type="text" placeholder="Trend Title" class="form-control" name="title" ng-model="trend.title" ng-maxlength="50"  required>
+              <span class="error-msg" ng-if="trendSubmitted && trendForm.title.$error.required">Trend title is required</span> <span class="error-msg" ng-if="trendSubmitted && trendForm.title.$error.maxlength">Trend title should not exceed than 50 characters</span> <span class="error-msg" ng-if="errors.title">{{errors.title}}</span> </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <label class="main-lable">Trend Icon</label>
+              <input name="icon" id="trendIcon" type="file" ngf-select ng-model="trendIcon" class="upload" required/>
+			  <span class="error-msg" ng-if="trendIconError">Please upload file in jpg, jpeg or png format with max size limit of 4 MB</span>
+			 	   
+			 <span class="error-msg" ng-if="errors.icon">{{errors.icon}}</span>
+             <span class="error-msg" ng-if="trendSubmitted && trendForm.icon.$error.required">Trend icon is required</span> <span class="error-msg" ng-if="errors.icon">{{errors.icon}}</span> </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <label class="main-lable">Is Active</label>
+              <div class="btn-group pad-new">
+                <label class="btn btn-default" ng-class="{'active':trend.isActive == 1}">
+                  <input type="radio"  class="btn btn-default" id="q158" name="isActive" ng-model="trend.isActive" value="1" required/>
+                  <i class="fa fa-thumbs-o-up"></i> Yes</label>
+                <label class="btn btn-default" ng-class="{'active':trend.isActive == 0}">
+                  <input type="radio"  class="btn btn-default"  id="q159"  name="gender" ng-model="trend.isActive" value="0" required/>
+                  <i class="fa fa-thumbs-o-down"></i> No </label>
+              </div>
+              <span class="error-msg" ng-if="trendSubmitted && trendForm.isActive.$error.required">Is Active is required</span> </div>
+            <div class="col-md-4 col-sm-6">
+              <label class="main-lable">&nbsp;</label>
+              <input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Add'}}" ng-click="addTrendSubmit()" ng-disabled="loading" />
+            </div>
+          </div>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>

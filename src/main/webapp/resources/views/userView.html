@@ -1,0 +1,107 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+
+<section class="container">
+	<div class="row"><!--row Start-->
+	<div class="col-md-12"><h3 class="margin-top-none"><a ng-href="#users" class="btn btn-sm btn-success" title="Back to Users List"><i class="fa fa-angle-double-left"></i> Back to Users List </a></h3></div>
+		<div class=" col-md-3">
+ 			<div class="profile-img-section margin-btm-none">
+ 				<div class="expert-img">
+					<div class=" profile-img">    
+		    			<img alt="Profile Pic" ng-src="{{userDetail.image}}"  />
+		    			<!-- <span class="expert-txt-big" tooltip-placement="top" tooltip="AwsmU Expert"></span> -->
+	    			</div> 
+	    		</div> 
+	    
+	    		<h1 class="profile-name">{{userDetail.displayName}}</h1>
+
+	   			<h4>{{userDetail.city}}<span ng-if="city != ''"><i ng-if="userDetail.country">, </i></span>{{userDetail.country}} <span ng-if="userDetail.area">({{userDetail.area}})</span></h4>	   
+			</div> 
+			<ul class="side-nav list-unstyled">
+			     <li><a ng-href="#/userView/{{userDetail._id}}"><i class="fa fa-user"></i> Profile</a></li>
+			     <li><a ng-href="#/userEdit/{{userDetail._id}}" target="_self" ><i class="fa fa-pencil-square-o"></i> Edit Profile</a></li>
+			     <li><a ng-href="#/userPlannersList/{{userDetail._id}}" target="_self" ><i class="fa  fa-calendar-check-o"></i>Planners List</a></li>
+			     <li><a ng-href="#/posts/{{userDetail._id}}" target="_self" ><i class="fa  fa-list"></i> Posts List</a></li>
+			     <li><a ng-href="#/userBookletsList/{{userDetail._id}}" target="_self" ><i class="fa  fa-sticky-note-o"></i> Booklets</a></li>
+			     <li><a ng-href="#/userConnectionList/{{userDetail._id}}" target="_self" ><i class="fa  fa-sticky-note-o"></i> Connections</a></li>
+			    
+			 </ul>
+  		</div>
+    	
+    	<div class="col-md-9"  ><!-- col-md-7 Start -->
+      		<div class="profile-info-rightsection"><!-- profile-info-rightsection Start -->
+      			<h3 class="section-title">User Information</h3>
+      			
+    			<p class="info-field">
+    	  			<label class="main-label">Name</label> {{userDetail.name}} 
+    			</p>
+    			<p class="info-field">
+    	  			<label class="main-label">Username</label> {{userDetail.username}} 
+    			</p>
+	      		<p class="info-field">
+	      	  		<label class="main-label">Email</label> {{userDetail.email}} 
+	      		</p>
+      	
+		      	<p class="info-field">
+		      	  <label class="main-label">DOB</label> <span>{{userDetail.dateOfBirth}}</span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Gender</label> <span>{{userDetail.gender}}</span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Address</label> <span>{{userDetail.address}}</span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Profession</label> <span>{{userDetail.profession}}</span>
+		      	</p>
+		      	<p ng-if="userDetail.speciality" class="info-field">
+		      	  <label class="main-label" ng-if="userDetail.speciality">Speciality</label> <span ng-repeat="speciality in userDetail.speciality">{{speciality}} </span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">About me</label> <span>{{userDetail.aboutMe}}</span>
+		      	</p>
+		      	  <p class="info-field">
+		      	  <label class="main-label">Created Date</label> <span>{{userDetail.createdDate}}</span>
+		      	</p>
+		      	 <p class="info-field">
+		      	  <label class="main-label">User Role</label> <span>{{userDetail.userRole}}</span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Is Active</label> <span>{{userDetail.isActive}}</span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Privacy</label> <span>{{userDetail.showPersonal}}</span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Facebook Id</label> <span>{{userDetail.facebookUrl}}</span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Twitter Id</label> <span>{{userDetail.twitterUrl}}</span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Linkedin Id</label> <span>{{userDetail.linkedinUrl}}</span>
+		      	</p>
+		      	<p class="info-field">
+		      	  <label class="main-label">Last login</label> <span>{{userDetail.lastLogin}}</span>
+		      	</p>
+
+		      	<h3 class="section-title bdr-top">Appearance Information</h3>
+		      	<table class="table all-planner" ng-if="userAttributesList.length">
+				  <thead>
+				    <tr>
+				     <th>Option</th>
+				     <th>Answer</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr ng-repeat="attr in userAttributesList"> 
+				      <td> {{attr.attrText}} </td>
+				      <td> {{attr.answer}} </td>
+				    </tr>
+				  </tbody>
+				</table>
+		      </div><!-- profile-info-rightsection End-->
+      
+      	
+    	</div><!-- col-md-7 End -->
+  </div>
+  <!--row End--> </section>

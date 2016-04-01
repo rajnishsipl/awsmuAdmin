@@ -1,0 +1,120 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--row Start-->
+		<div class=" post-info-rightsection "> 
+			<h3 class="section-title">Edit Problem </h3>
+			<form name="problemForm" novalidate> 
+			 <ul class="list-unstyled profile-form">
+	          <li>
+	            <div class="row"><!--row Start-->
+	              <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable">Problem Name</label> 
+					<input type="text" placeholder="Problem Name" class="form-control" name="name" ng-model="problem.name" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]{2,50}$/" required>
+					<span class="error-msg" ng-if="problemSubmitted && problemForm.name.$error.required">Problem name is required</span>
+					<span class="error-msg" ng-if="problemSubmitted && problemForm.name.$error.maxlength">Problem name should not exceed than 50 characters</span> 
+					<span class="error-msg" ng-if="problemSubmitted && problemForm.name.$invalid">Problem name is incorrect</span>
+					<span class="error-msg" ng-if="errors.name">{{errors.name}}</span>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+                 <label class="main-lable">Problems Title</label> 
+	              	<input type="text" placeholder="Problem Title" class="form-control" name="title" ng-model="problem.title" ng-maxlength="50" required>
+					<span class="error-msg" ng-if="problemSubmitted && problemForm.title.$error.required">Problem title is required</span>
+					<span class="error-msg" ng-if="problemSubmitted && problemForm.title.$error.maxlength">Problem title should not exceed than 50 characters</span> 
+					<span class="error-msg" ng-if="errors.name">{{errors.title}}</span>
+          		</div>
+          		</div>
+          		</li>
+          		
+          		<li>
+	            <div class="row"><!--row Start-->
+	           
+	            <div class="col-lg-6 col-md-6 col-sm-6">
+	             	<label class="main-lable">Parent Problem</label>
+		            <ol class="nya-bs-select clr" name="parentId" ng-model="problem.parent_id">
+	                  <li nya-bs-option="problems in prList | orderBy"  data-value="problems._id"> <a> <span>{{ problems.title }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+	                </ol>
+	               <span class="error-msg" ng-if="errors.parent_id">{{errors.parent_id}}</span>
+				</div>
+				
+				
+				<div class="col-lg-6 col-md-6 col-sm-6">
+                 <label class="main-lable">Trends</label> 
+	              
+	              <ol class="nya-bs-select clr" name="trends" ng-model="problem.trendsIdList" actions-box="true" required multiple>
+                  <li nya-bs-option="trend in trendsList| orderBy" data-value="trend._id"> <a> <span>{{ trend.title }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                </ol>
+	            <span class="error-msg" ng-if="problemSubmitted && problemForm.trends.$error.required">Trend is required</span>
+				<span class="error-msg" ng-if="problem.trends">{{errors.trends}}</span>
+          		</div>
+          		</div>
+          		</li>
+          		
+          		
+          		 <li>
+	            <div class="row"><!--row Start-->
+	              <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable">Problem Icon</label> 
+						<div class="col-md-12">
+              				<label class="main-lable">Current Icon</label>
+              				<img  height="100"  ng-src="{{problem.iconUrl}}"> 
+              			</div>
+						<div class="clr"></div>
+					
+					<input name="problemIcon" id="problemIcon" type="file" ngf-select ng-model="problemIcon" class="upload"/>
+					
+					<span class="error-msg" ng-if="problemIconError">Please upload file in jpg, jpeg or png format with max size limit of 4 MB</span>
+						   
+					<span class="error-msg" ng-if="errors.icon">{{errors.icon}}</span>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+                 <label class="main-lable">Problems Banner</label> 
+                 		<div class="col-md-12">
+              				<label class="main-lable">Current Banner</label>
+              				<img  height="100"  ng-src="{{problem.bannerUrl}}"> 
+              			</div>
+              			<div class="clr"></div>
+	              	<input name="problemBanner" id="problemBanner" type="file" ngf-select="editImageSubmit()" ng-model="problemBanner" class="upload"/>
+	              	
+	              	<span class="error-msg" ng-if="problemBannerError">Please upload file in jpg, jpeg or png format with max size limit of 4 MB</span>
+	              	<span class="error-msg" ng-if="errors.banner">{{errors.banner}}</span>
+          		</div>
+          		
+          		
+          		
+          		</div>
+          		</li>
+          		<li>
+          		<div class="row"><!--row Start-->
+          		 
+          		
+          		
+          		<div class="col-lg-3 col-md-4 col-sm-6">
+                 	<label class="main-lable">Is Active</label>
+             		<div class="btn-group pad-new">
+                     <label class="btn btn-default" ng-class="{'active':problem.isActive == 1}">
+                     <input type="radio"  class="btn btn-default" id="q158" name="isActive" ng-model="problem.isActive" value="1" required/>
+                     <i class="fa-male"></i> Yes</label>
+                    <label class="btn btn-default" ng-class="{'active':problem.isActive == 0}">
+                     <input type="radio"  class="btn btn-default"  id="q159"  name="isActive" ng-model="problem.isActive" value="0" required />
+                     <i class="fa-female"></i> No </label>
+                      <span class="error-msg" ng-if="problemSubmitted && problemForm.isActive.$error.required">Is Active is required</span>
+                 	</div>
+               </div>
+          		
+          		 <div class="col-lg-6 col-md-6 col-sm-6">
+	          		<label class="main-lable">Description </label> 
+					<textarea rows="" cols="" placeholder="Add description for activity" class="form-control" name="description" ng-model="problem.description" maxlength="500" required>
+					</textarea>
+					<span class="error-msg" ng-if="problemSubmitted && problemForm.description.$error.required">Description is required</span>
+					<span class="error-msg" ng-if="problemSubmitted && problemForm.description.$error.maxlength">Description should not exceed than 500 characters</span> 
+					<span class="error-msg" ng-if="errors.description">{{errors.description}}</span>
+          		 </div>
+          		 
+          		 </div>
+          		</li>
+          		
+          		</ul>
+          		<input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Update'}}" ng-click="editProblemSubmit()" ng-disabled="loading">
+       		</form>
+      	</div>
+      </div>
+          		

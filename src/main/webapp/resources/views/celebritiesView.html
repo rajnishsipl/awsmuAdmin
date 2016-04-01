@@ -1,0 +1,50 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--container Start-->
+		<div class="post-info-rightsection "> 
+   			<h3 class="section-title">Celebrity Details 
+   			<span class="fr">
+   			<a class="btn btn-sm btn-success" ng-href ="#/celebritiesEdit/{{celebrity._id}}"><i class="fa fa-edit"></i> Edit</a>  <b> </b>  <a class="btn btn-sm btn-warning" ng-href ="#/celebrities"><i class="fa fa-th-list"></i> Celebrities List</a>
+   			</span></h3>
+	         <p class="info-field">
+	             <label class="main-label">Name</label>{{celebrity.name}}
+		</p>
+	         <p class="info-field">   
+                 <label class="main-label">Main Image</label><img height="100" ng-src="{{celebrity.imageUrl+celebrity.mainImage}}" alt="" /> 
+             </p>    
+             <p class="info-field"> 
+              	<label class="main-label">Gender </label> {{celebrity.gender}}
+			 </p>
+			 <p class="info-field"> 
+ 				<label class="main-label">profession</label> {{celebrity.profession}}
+ 			</p>
+ 			
+ 			<p class="info-field"> 
+ 				<label class="main-label">nationality</label> {{celebrity.nationality}}
+ 			</p>
+			 
+			 <p class="info-field"> 
+				<label class="main-label">Options </label> 
+				<u ng-repeat="image in celebrity.images">
+					<!-- <img height="100" ng-src="{{celebrity.imageUrl+image.name}}" alt="" />
+					 -->
+					<lable>Attribute </lable>{{image.attribute}}
+					<lable> Attribute Title</lable>{{image.attributeTitle}}  {{$last ? '' : ', '}}
+				</u> 
+			 </p>
+			 		
+			
+            <p class="info-field"> 
+ 				<label class="main-label">Is Active</label> <span ng-if="celebrity.isActive=='0'" >No</span><span ng-if="celebrity.isActive=='1'" >Yes</span>
+ 			</p>	
+         	
+         	<p class="info-field"> 
+ 				<label class="main-label">Created Date</label> {{celebrity.createdDate}}
+ 			</p>
+ 			
+ 			<p class="info-field"> 
+ 				<label class="main-label">Updated Date</label> {{celebrity.updatedDate}}
+ 			</p>
+	    </div>
+	</div>
+	
+

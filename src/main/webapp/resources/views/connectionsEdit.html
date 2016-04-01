@@ -1,0 +1,44 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+<div class="container"><!--row Start-->
+  <div class=" post-info-rightsection ">
+    <h3 class="section-title">Update Connection </h3>
+    
+    <form name="connectionForm" novalidate>
+      <ul class="list-unstyled profile-form">
+        <li>
+          <div class="row"><!--row Start-->
+            <div class="col-md-4 col-sm-6">
+              <label class="main-lable">From User</label>
+              {{connection.fromUser.displayName}}
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <label class="main-lable">To User</label>
+              {{connection.toUser.displayName}}
+              </div>
+           
+          </div>
+        </li>
+        <li>
+          <div class="row"><!--row Start-->
+            
+            <div class="col-md-12 col-sm-12">
+              <label class="main-lable">Status</label>
+              <ol class="nya-bs-select clr" ng-model="connection.status" required name="status">
+                  <li class="nya-bs-option" value=""> <a><span>Select Status</span></a> </li>
+                  <li class="nya-bs-option" value="pending"> <a><span>Pending</span><span class="glyphicon glyphicon-ok check-mark"></span></a> </li>
+                  <li class="nya-bs-option" value="accept"> <a><span>Accept</span><span class="glyphicon glyphicon-ok check-mark"></span></a> </li>
+                  <li class="nya-bs-option" value="decline"> <a><span>Decline</span><span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                </ol>
+                <span class="error-msg" ng-if="connectionSubmitted && connectionForm.status.$error.required">Status is required</span>
+            
+            </div> 
+             <div class=" col-md-4 col-sm-6">
+              <label class="main-lable">&nbsp;</label>
+              <input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Update'}}" ng-click="editConnectionSubmit()" ng-disabled="loading">
+            </div>
+          </div>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>

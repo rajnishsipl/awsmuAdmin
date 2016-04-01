@@ -1,0 +1,343 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+
+<div class="container">
+  <div class="row"><!--row Start-->
+    
+    <div class=" col-md-3">
+      <form id="uploadForm" class="userform-bg margin-btm-none" method="post" enctype="multipart/form-data">
+        <div class="fileinput fileinput-exists" data-provides="fileinput">
+          <div class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput"> <img ng-src="{{userImageUrl}}" alt="Profile pic" id="profilePic"> </div>
+          <div> <span class="btn  btn-file">
+            <input type="button" value="{{uploading && 'Please wait...' || 'Upload'}}" title="Upload" class="fileinput-exists" id="uploadPic" ng-disabled="uploadAction">
+            <input type="file" name="file" id="file">
+            </span>
+            <input type="button" class="btn btn btn-danger fileinput-exists" data-dismiss="fileinput" value="{{removing && 'Please wait...' || 'Remove'}}" title="Remove" ng-show="imageExists" id="removePic" ng-click="removeProfilePic()" ng-disabled="uploadAction">
+          </div>
+        </div>
+      </form>
+      <ul class="side-nav list-unstyled">
+	  	 <li><a ng-href="#/userView/{{userDetail._id}}"><i class="fa fa-user"></i> Profile</a></li>
+		 <li><a ng-href="#/userEdit/{{userDetail._id}}" target="_self" ><i class="fa fa-pencil-square-o"></i> Edit Profile</a></li>
+	 	 <li><a ng-href="#/userPlannersList/{{userDetail._id}}" target="_self" ><i class="fa  fa-calendar-check-o"></i>Planners List</a></li>
+		 <li><a ng-href="#/posts/{{userDetail._id}}" target="_self" ><i class="fa  fa-list"></i> Posts List</a></li>
+		 <li><a ng-href="#/userBookletsList/{{userDetail._id}}" target="_self" ><i class="fa  fa-sticky-note-o"></i> Booklets</a></li>
+	  </ul>
+    </div>
+    <div class=" col-md-9"> 
+    
+      <div class="align-center crop-wrapper" ng-show="cropSection">
+      		<div class="cropArea">
+       	  		<img-crop image="myImage" result-image="myCroppedImage"></img-crop>  
+       	  	</div>
+  	 		<input class="btn btn-sm" type="button" ng-click="uploadProfilePic()" value="Submit">
+	 		<input class="btn btn-sm btn-danger" type="button" ng-click="cancelCrop()" value="Cancel">
+     </div>
+	    	  
+      <form class="userform-bg" name="profileForm" novalidate>
+        <ul class="list-unstyled profile-form">
+          <li>
+            <div class="row"><!--row Start-->
+              <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="main-lable">Name</label>
+                <input type="text" placeholder="Name" class="form-control" name="name" ng-model="userDetail.name" ng-maxlength="100" required>
+                <span class="error-msg" ng-if="profileSubmitted && profileForm.name.$error.required">Name is required</span> 
+                <span class="error-msg" ng-if="profileSubmitted && profileForm.name.$error.maxlength">Name should not exceed than 100 characters</span> 
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="main-lable">Display Name</label>
+                <input type="text" placeholder="Display Name" class="form-control" name="displayName" ng-model="userDetail.displayName" ng-maxlength="100" required >
+                <span class="error-msg" ng-if="profileSubmitted && profileForm.displayName.$error.required">Display name is required</span>
+                <span class="error-msg" ng-if="profileSubmitted && profileForm.displayName.$error.maxlength">Display name should not exceed than 100 characters</span> 
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="main-lable">Date of Birth</label>
+                <input id="datepicker" type="text" class="form-control" ng-model="userDetail.dateOfBirth" name="dateOfBirth" placeholder="mm/dd/yyyy" readonly>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="main-lable">Gender</label>
+                <div class="btn-group pad-new">
+                  <label class="btn btn-default" ng-class="{'active':userDetail.gender == 'Male'}">
+                    <input type="radio"  class="btn btn-default" name="gender" ng-model="userDetail.gender" value="Male" />
+                    <i class="fa-male"></i> Male</label>
+                  <label class="btn btn-default" ng-class="{'active':userDetail.gender == 'Female'}">
+                    <input type="radio"  class="btn btn-default"   name="gender" ng-model="userDetail.gender" value="Female" />
+                    <i class="fa-female"></i> Female </label>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row"><!--row Start-->
+              <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="main-lable">Country</label>
+                <ol class="nya-bs-select clr" ng-model="userDetail.country" ng-change="getCities()" data-live-search="true">
+                  <li nya-bs-option="country in nationalities" data-value="country.nicename"> <a> <span>{{ country.nicename }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                </ol>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="main-lable">City</label>
+                <ol class="nya-bs-select clr" ng-model="userDetail.city" data-live-search="true">
+                  <li nya-bs-option="city in cityList | orderBy"> <a> <span>{{ city }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                </ol>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="main-lable">Address</label>
+                <input type="text" name="address" id="address" ng-model="userDetail.address" placeholder="Address" class="form-control">
+                <input type="hidden" name="latitude" id="latitude" ng-model="userDetail.latitude" >
+                <input type="hidden" name="longitude" id="longitude" ng-model="userDetail.longitude" >
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="main-lable">Phone</label>
+                <input type="text" placeholder="Phone" class="form-control" name="userDetail.phone" ng-model="phone"  ng-pattern="/^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/" >
+                <span class="error-msg" ng-if="profileSubmitted && profileForm.phone.$invalid">Phone number is invalid</span> 
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row"><!--row Start-->
+              <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="main-lable">Nationality</label>
+                <ol class="nya-bs-select clr" ng-model="userDetail.nationality">
+                  <li nya-bs-option="nationality in nationalities | orderBy" data-value="nationality.nationality"> <a> <span>{{ nationality.nationality }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                </ol>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-6">
+                <label class="main-lable">Profession</label>
+                <ol class="nya-bs-select clr" ng-model="userDetail.profession">
+                  <li nya-bs-option="profession in professionList | orderBy" data-value="profession.name"> <a> <span>{{ profession.name }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                </ol>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row"><!--row Start-->
+              <div class="col-sm-12">
+                <label class="main-lable">About me </label>
+                <textarea rows="" cols="" class="form-control"  name="aboutMe" id="aboutMe" ng-model="userDetail.aboutMe" placeholder="Write something about yourself..." maxlength="250"></textarea>
+              </div>
+            </div>
+            <!--row End--> 
+          </li>
+          <li>
+            <div class="row"><!--row Start-->
+              <div class="col-lg-12">
+                <h4>Expert Info:</h4>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <label class="main-lable">Degree Courses</label>
+               	<ol id="degreeCourses" class="nya-bs-select clr" ng-model="expert.degreeCourses" data-selected-text-format="values" multiple>
+				  <li nya-bs-option="degreeCourses in degreeCoursesList | orderBy" data-value="degreeCourses">
+				    <a>
+				      <span>{{ degreeCourses }}</span>
+				      <span class="glyphicon glyphicon-ok check-mark"></span>
+				    </a>
+				  </li>
+				</ol>  
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <label class="main-lable">Specialities</label>
+               	 <ol id="specialties" class="nya-bs-select" ng-model="expert.specialties" data-selected-text-format="values" multiple>
+				  <li nya-bs-option="speciality in specialtieslist | orderBy" data-value="speciality">
+				    <a>
+				      <span>{{ speciality }}</span>
+				      <span class="glyphicon glyphicon-ok check-mark"></span>
+				    </a>
+				  </li>
+				</ol>  
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row"><!--row Start-->
+              <div class="col-lg-12">
+                <h4>Unique Info:</h4>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <label class="main-lable">Username</label>
+		        <input type="text" placeholder="Username" class="form-control" name="username" ng-model="userDetail.username" ng-maxlength="30" ng-minlength="4" ng-pattern="/^[a-z0-9_-]{4,30}$/" required>
+		        <span class="error-msg" ng-if="profileSubmitted && profileForm.username.$error.required">Username is required</span>
+		        <span class="error-msg" ng-if="profileSubmitted && profileForm.username.$invalid">Username is incorrect</span>
+		        <span class="error-msg" ng-if="profileSubmitted && profileForm.username.$error.maxlength">Username should not exceed than 30 characters</span>
+		        <span class="error-msg" ng-if="profileSubmitted && profileForm.username.$error.minlength">Username must be atleast 4 characters long</span>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <label class="main-lable">Email</label>
+		        <input type="email" placeholder="Email" class="form-control" name="email" ng-model="userDetail.email">
+		        <span ng-if="profileSubmitted && profileForm.email.$error.email" class="error-msg ng-scope">Invalid email address</span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row"><!--row Start-->
+              <div class="col-lg-12">
+                <h4>Your Social Accounts:</h4>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <label class="main-lable">Facebook URL</label>
+                <input type="text" placeholder="Facebook URL" class="form-control" name="facebookUrl" ng-model="userDetail.facebookUrl" ng-maxlength="500" ng-pattern="/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/" >
+                <span class="error-msg" ng-if="profileSubmitted && profileForm.facebookUrl.$error.maxlength">Facebook URL should not exceed than 500 characters.</span> 
+                <span class="error-msg" ng-if="profileSubmitted && profileForm.facebookUrl.$invalid">URL is invalid.</span> </div>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <label class="main-lable">Twitter URL</label>
+                <input type="text" placeholder="Twitter URL" class="form-control" name="twitterUrl" ng-model="userDetail.twitterUrl" ng-maxlength="500" ng-pattern="/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/">
+                <span class="error-msg" ng-if="profileSubmitted && profileForm.twitterUrl.$error.maxlength">Twitter URL should not exceed than 500 characters.</span>
+                <span class="error-msg" ng-if="profileSubmitted && profileForm.twitterUrl.$invalid">URL is invalid.</span> </div>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <label class="main-lable">LinkedIn URL</label>
+                <input type="text" class="form-control" ng-model="userDetail.linkedInUrl" name="linkedInUrl" placeholder="LinkedIn URL" ng-maxlength="500" ng-pattern="/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/">
+                <span class="error-msg" ng-if="profileSubmitted && profileForm.linkedInUrl.$error.maxlength">LinkedIn URL should not exceed than 500 characters.</span> 
+                <span class="error-msg" ng-if="profileSubmitted && profileForm.linkedInUrl.$invalid">URL is invalid.</span> 
+               </div>
+            </div>
+          </li>
+         
+          <li>
+            <div class="row"><!--row Start-->
+              <div class="col-lg-12">
+                <h4>Privacy settings:</h4>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+              	<label class="main-lable">Phone and Date of Birth visibility</label>
+                <ol class="nya-bs-select clr" ng-model="userDetail.showPersonal">
+                  <li nya-bs-option="option in visibilityOptions"> <a> <span><span ng-class="visibilityIcons[$index + 1]"></span> {{ option }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                </ol>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+              	<label class="main-lable">Body Information visibility</label>
+                <ol class="nya-bs-select clr" ng-model="userDetail.showAttributes">
+                  <li nya-bs-option="option in visibilityOptions"> <a> <span><span ng-class="visibilityIcons[$index + 1]"></span> {{ option }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                </ol>  
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+              	<label class="main-lable">My planner visibilty</label>
+                <ol class="nya-bs-select clr" ng-model="userDetail.showPlanner">
+                  <li nya-bs-option="option in visibilityOptions"> <a> <span><span ng-class="visibilityIcons[$index + 1]"></span> {{ option }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+                </ol>  
+              </div>
+            </div>
+          </li>   
+          <li>
+            <div class="row"><!--row Start-->
+              <div class="col-lg-12">
+                <h4>Role:</h4>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <label class="main-lable">Role</label>
+                <div class="btn-group pad-new">
+                  <label class="btn btn-default" ng-class="{'active':userDetail.userRole == 'user'}">
+                    <input type="radio"  class="btn btn-default" name="role" ng-model="userDetail.userRole" value="user" />
+                    <i class="fa-user"></i> User</label>
+                  <label class="btn btn-default" ng-class="{'active':userDetail.userRole == 'expert'}">
+                    <input type="radio"  class="btn btn-default"   name="gender" ng-model="userDetail.userRole" value="expert" />
+                    <i class="fa-user-md"></i> Expert </label>
+                </div>
+              </div>
+              
+              <div class="col-lg-4 col-md-4 col-sm-6">
+                <label class="main-lable">Is Active </label>
+                <div class="btn-group pad-new">
+                  <label class="btn btn-default" ng-class="{'active':userDetail.isActive == '1'}">
+                    <input type="radio"  class="btn btn-default" name="active" ng-model="userDetail.isActive" value="1" />
+                    <i class="fa-toggle-on"></i> Active</label>
+                  <label class="btn btn-default" ng-class="{'active':userDetail.isActive == '0'}">
+                    <input type="radio"  class="btn btn-default"   name="inactive" ng-model="userDetail.isActive" value="0" />
+                    <i class="fa-toggle-off"></i> Inactive </label>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <input type="submit" value="{{loading && 'Please wait...' || 'Save'}}" class="btn" ng-click="profileSubmit()" ng-disabled="loading">
+          </li>
+        </ul>
+      </form>
+      
+      <!--self-info End-->
+      <div class="self-info"><!--self-info Start-->
+        <form class="userform-bg" id="passwordForm" name="passwordForm" novalidate>
+	        <h3>Change password</h3>
+	        <div class="row"><!--row Start-->
+	         
+	            <div class="col-sm-5">
+	             	<label class="main-lable">New Password</label>
+	                <div class="input-group">
+	                <span id="basic-addon2" class="input-group-addon"><label><input type="checkbox" ng-model="showPassword" ng-checked="false"><b>Show?</b></label></span>
+	                    <input type="text" placeholder="Password" name="password" class="form-control" ng-model="password" ng-maxlength="16" ng-minlength="4" required ng-show="showPassword">
+	                    <input type="password" name="password" placeholder="Password" class="form-control" ng-model="password" ng-maxlength="16" ng-minlength="4" required ng-hide="showPassword">
+	                </div>
+	                <span class="error-msg" ng-if="passwordSubmitted && passwordForm.password.$error.required">Password is required</span>
+	 				<span class="error-msg" ng-if="passwordSubmitted && passwordForm.password.$error.maxlength">Password must not exceed than 16 characters</span>
+	 				<span class="error-msg" ng-if="passwordSubmitted && passwordForm.password.$error.minlength">Password must be at least 4 of characters</span> 
+	            </div>
+	           
+	            <div class="col-sm-2">
+	            <label class="main-lable">&nbsp;</label>
+	              <input type="submit" name="change" value="{{passwordLoading && 'Please wait...' || 'Change'}}" title="Change" class="btn" ng-click="passwordSubmit()">
+	            </div>
+
+	         </div>
+	     </form>
+      </div>
+	  <!--self-info End-->
+	      
+      <form class="userform-bg" name="attrForm" id="attrForm">
+        <h3 class="margin-btm-none">Appearance Information</h3>
+        <div class="row"><!--row Start-->
+          <div class="col-sm-12">
+            <div class="table-responsive ">
+              <table class="table all-planner">
+                <thead>
+                  <tr>
+                    <th>Option</th>
+                    <th>Answer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="attr in attributesList ">
+                    <td><label>{{attr.attrText}} </label></td>
+                    <td><div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default"  ng-repeat="option in attr.options" ng-class="{'active': attr.answer == option.text}">
+                          <input type="radio"  name="{{attr.optionsName}}" value="{{option.text}}" ng-checked="{{attr.answer == option.text}}" />
+                          {{option.text}} </label>
+                      </div>
+                      <input type="hidden"  name="{{attr.attrId}}" value="{{attr._id}}" /></td>
+                  </tr>
+                  <tr>
+                    <td ><input type="hidden" name="attrCount" value="{{attrCount}}"></td>
+                    <td>
+                    	<input type="submit" value="{{attrloading && 'Please wait...' || 'Save'}}" class="btn" ng-click="attrSubmit()" id="attrSubmit" ng-disabled="attrloading">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!--row End-->
+      </form>
+      
+    </div>
+  </div>
+  <!--row End--> 
+  
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		//google address
+		var places = new google.maps.places.Autocomplete(document.getElementById('address'));
+	    google.maps.event.addListener(places, 'place_changed', function () {
+	    	var place = places.getPlace();
+	    	
+	        var address = place.formatted_address;
+	        $("#latitude").val(place.geometry.location.lat());
+	        $("#longitude").val(place.geometry.location.lng());  
+	       			
+	    });
+	    
+   		//Bootstrap Date picker
+   		var nowDate = new Date();
+   		var endDate = new Date(nowDate.getFullYear()-15, nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
+   		$('#datepicker').datepicker({ autoclose: true,  endDate: endDate, forceParse: false});
+	});	
+ </script>

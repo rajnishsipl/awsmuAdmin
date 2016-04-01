@@ -1,0 +1,9 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+<h1 class="page-title">Planner Group</h1>
+<div class="container" id="main">
+    <ng-jqgrid config="config" addnew="true" modeldata="griddata" gridid="datagrid" pagerid="datapager" api="gridapi"></ng-jqgrid>       
+</div>
+
+<div>
+<button ng-click="makeDatabaseChanges()">makeDatabaseChanges</button>
+</div>

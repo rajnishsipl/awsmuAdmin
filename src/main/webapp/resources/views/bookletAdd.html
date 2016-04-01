@@ -1,0 +1,47 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+
+<section class="container">
+	<div class="post-info-rightsection">
+   		<h3 class="section-title">Document Form</h3>
+    	<form name="bookletForm" id="bookletForm" enctype="multipart/form-data" novalidate>
+      		<ul class="list-unstyled profile-form">
+				<li>
+			    	<div calss="row">
+			      		<div class="col-md-4 col-sm-6">
+					    	<label class="main-lable">Document title</label>
+					        <input type="text" class="form-control" name="title" ng-model="booklet.title" id="title" ng-maxlength="100" required placeholder="Document title" />
+							<span class="error-msg" ng-if="bookletSubmitted && bookletForm.title.$error.required">Title is required</span>
+							<span class="error-msg" ng-if="bookletSubmitted && bookletForm.title.$error.maxlength">Title should not exceed than 100 characters</span>
+					    </div>
+						<div class="col-md-4 col-sm-6">
+				      		<label class="main-lable">Description</label>
+				        	<input type="text" class="form-control" name="description" ng-model="booklet.description" id="description" ng-maxlength="200" required placeholder="Write short description" />
+		     				<span class="error-msg" ng-if="bookletSubmitted && bookletForm.description.$error.required">Description is required</span>
+							<span class="error-msg" ng-if="bookletSubmitted && bookletForm.description.$error.maxlength">Description should not exceed than 200 characters</span>
+				      	</div>
+		      
+				      	<div class="col-md-4 col-sm-6">
+				      		<label class="main-lable">Add File</label>
+				        	<input name="file" id="file" type="file" ngf-select ng-model="file" class="upload" />
+							<span class="error-msg" ng-if="fileError">Please upload file in ppt, doc, docx, xls, pdf, jpg, jpeg or png format with max size limit of 4 MB</span>
+				      	</div>
+		      		  	<span class="clr"></span>
+		      		</div>
+			      
+			   </li>
+			   
+			   <li>
+			   		<div calss="row ">
+			    
+			      		<div class="col-md-4 col-sm-6">
+			       			<label class="main-lable">&nbsp;</label>
+			      			<input type="submit" value="{{loading && 'Please wait...' || 'Save'}}" class="btn" ng-click="bookletAddSubmit()" ng-disabled="loading">	
+			      		</div>
+			      
+			    	</div>
+					<span class="clr"></span>
+			  </li>
+	  		</ul>
+     	</form>
+     </div>    		
+</section>

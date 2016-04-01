@@ -1,0 +1,8 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	
+	<div class="container" id="main">
+	<h1 class="page-title">Trends List 
+	 <a ng-href="#trendsAdd" class="btn btn-sm btn-danger fr" title="Add New Trend"><i class="glyphicon glyphicon-plus"></i> Add New Trend</a>
+	</h1>  
+    	<ng-jqgrid config="config" addnew="true" modeldata="trendsdata" gridid="trendsGrid" pagerid="trendsPager" api="gridapi"></ng-jqgrid>       
+  	</div>

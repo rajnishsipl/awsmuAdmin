@@ -1,0 +1,8 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	
+	<div class="container" id="main">  
+	<h1 class="page-title">Activities Category List 
+	 <a ng-href="#activityCategoriesAdd" class="btn btn-sm btn-danger fr" title="Add New Activity Category"><i class="glyphicon glyphicon-plus"></i> Add New Activity Category</a>
+	</h1>
+    	<ng-jqgrid config="config" addnew="true" modeldata="activityCategoriesdata" gridid="activityGrid" pagerid="problemsPager" api="gridapi"></ng-jqgrid>       
+  	</div>

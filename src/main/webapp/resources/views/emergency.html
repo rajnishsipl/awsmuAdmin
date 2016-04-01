@@ -1,0 +1,70 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+
+    
+    <section class="container">
+    <h3>Add Emergency Contacts Form <!-- <a class="click fr  btn btn-sm" ng-click="isCollapsed = !isCollapsed"> Add New Doctor</a> --></h3>
+		<div class="emergency-contacts"><!-- emergency-contacts Start -->	
+				<!-- Add New Doctors Form Start -->
+				<div ><!-- collapse="isCollapsed" need to add -->
+				  <div class="searchform-section "><!-- searchform-section Start -->
+		 			<section class="search-form profile-form">
+		 				<form name="userDoctorsForm" id="userDoctorsForm" novalidate="novalidate">
+		 				  <ul class="list-unstyled profile-form">
+				           <li>
+			   				 <div class="row">
+			   					<div class="col-md-3 col-sm-6">
+								  <label class="main-lable">Name</label>
+								  <input type="text" class="form-control" name="name"  ng-model="name" id="name" ng-maxlength="100" required />
+								  <span class="error-msg" ng-if="(userDoctorsForm.name.$dirty && userDoctorsForm.name.$error.required) || (doctorSubmitted && userDoctorsForm.name.$error.required)">Name is required</span>
+								  <span class="error-msg" ng-if="(userDoctorsForm.name.$dirty && userDoctorsForm.name.$error.maxlength) || (doctorSubmitted && userDoctorsForm.name.$error.maxlength)">Name should not exceed than 100 characters</span>  
+								</div>
+								<div class="col-md-3 col-sm-6">
+								 <label class="main-lable">Specialties</label>			   
+								   <ol id="specialties" class="nya-bs-select" ng-model="specialties" data-selected-text-format="values" multiple>
+									 <li nya-bs-option="specialty in specialtyList.value">
+										<a>{{specialty}}
+											<span class="glyphicon glyphicon-ok check-mark"></span>
+										</a>
+									</li>
+								  </ol>
+								</div>
+								<div class="col-md-3 col-sm-6">
+								   <label class="main-lable">Personal No</label>
+									<input type="text" class="form-control" name="personalPhone" ng-model="personalPhone" id="personalPhone" ng-pattern="/^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/" >  
+									<span class="error-msg" ng-if="(userDoctorsForm.personalPhone.$dirty && userDoctorsForm.personalPhone.$invalid) || (doctorSubmitted && userDoctorsForm.personalPhone.$invalid)">Phone number is invalid</span>
+								</div>
+								<div class="col-md-3 col-sm-6">
+								    <label class="main-lable"> Office No</label> 
+									<input type="text" class="form-control" name="officePhone" ng-model="officePhone" id="officePhone" ng-pattern="/^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/" >  
+									<span class="error-msg" ng-if="(userDoctorsForm.officePhone.$dirty && userDoctorsForm.officePhone.$invalid) || (doctorSubmitted && userDoctorsForm.officePhone.$invalid)">Phone number is invalid</span>
+								</div>
+						      </div>
+							</li>
+							<li>
+			   				 <div class="row">
+								
+								<div class="col-md-3 col-sm-6">
+								    <label class="main-lable">Address</label>
+									<input type="text" name="address" id="address" ng-model="address" class="form-control">
+									<input type="hidden" name="latitude" id="latitude" ng-model="latitude" >
+									<input type="hidden" name="longitude" id="longitude" ng-model="longitude" > 
+								</div>
+								<div class="col-md-3 col-sm-6">
+								 <label class="main-lable">&nbsp;</label>
+								    <input type="submit" name="Save" value="Add Contact" title="Add Contact" class="btn" ng-click="doctorSubmit()" id="doctorSubmit">
+								</div>
+			   				</div>
+			   			 </li>
+			   		
+			   			</ul>
+			   			</form>
+		 			</section>
+				  </div><!-- searchform-section End --> 
+				</div>
+				<!-- Add New Doctors Form End -->
+ 				
+		</div><!-- emergency-contacts End -->
+	    <!-- <p class="current-plan" >Do you add new emergency contacts's  to add it.</p> -->
+		
+	</section>
+

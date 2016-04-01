@@ -1,0 +1,30 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--row Start-->
+		<div class=" post-info-rightsection "> 
+			<h3 class="section-title">Add Attribute degree courses</h3>
+			 <form name="attributeDegreeCourseForm" novalidate> 
+			 <ul class="list-unstyled profile-form">
+	          <li>
+	            <div class="row"><!--row Start-->
+	             
+	              
+	              <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable" >Name</label> 
+					
+					<input type="text" placeholder="Degree Course Name" class="form-control" name="name" ng-model="degreeCoursesName" ng-maxlength="100"  required>
+					<span class="error-msg" ng-if="attributeDegreeCoursesSubmitted && attributeDegreeCourseForm.name.$error.required">Degree course name is required</span>
+					<span class="error-msg" ng-if="attributeDegreeCoursesSubmitted && attributeDegreeCourseForm.name.$error.maxlength">Degree course name should not exceed than 100 characters</span> 
+					
+					<span class="error-msg" ng-if="errors.name">{{errors.degreeCourse}}</span>
+				  </div>
+				
+					
+          		</div>
+          		</li>
+          			
+          		</ul>
+          		<input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Add'}}" ng-click="addAttributeDegreeCoursesSubmit()" ng-disabled="loading">
+       		 </form>
+      	</div>
+      </div>
+          		

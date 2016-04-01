@@ -1,0 +1,37 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--row Start-->
+		<div class=" post-info-rightsection "> 
+			<h3 class="section-title">Add Activity Category </h3>
+			<form name="activityCategoryForm" novalidate> 
+			 <ul class="list-unstyled profile-form">
+	          <li>
+	            <div class="row"><!--row Start-->
+	              <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable">Category Name</label> 
+					<input type="text" placeholder="Category Name" class="form-control" name="category" ng-model="activityCategory.category" ng-maxlength="50"  required>
+					<span class="error-msg" ng-if="activityCategoriesSubmitted && activityCategoryForm.category.$error.required">Category name is required</span>
+					<span class="error-msg" ng-if="activityCategoriesSubmitted && activityCategoryForm.category.$error.maxlength">Category name should not exceed than 50 characters</span> 
+					
+					<span class="error-msg" ng-if="errors.category">{{errors.category}}</span>
+				</div>
+					<div class="col-lg-3 col-md-4 col-sm-6">
+                 	<label class="main-lable">Is Active</label>
+             		<div class="btn-group pad-new">
+                     <label class="btn btn-default" ng-class="{'active':activityCategory.isActive == 1}">
+                     <input type="radio"  class="btn btn-default" id="q158" name="isActive" ng-model="activityCategory.isActive" value="1" required/>
+                     <i class="fa fa-thumbs-o-up"></i> Yes</label>
+                    <label class="btn btn-default" ng-class="{'active':activityCategory.isActive == 0}">
+                     <input type="radio"  class="btn btn-default"  id="q159"  name="gender" ng-model="activityCategory.isActive" value="0" required/>
+                     <i class="fa fa-thumbs-o-down"></i> No </label>
+                 	</div>
+                 	<span class="error-msg" ng-if="activityCategoriesSubmitted && activityCategoryForm.isActive.$error.required">Is Active is required</span>
+               </div>
+          		</div>
+          		</li>
+          			
+          		</ul>
+          		<input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Update'}}" ng-click="updateActivityCategorySubmit()" ng-disabled="loading">
+       		</form>
+      	</div>
+      </div>
+          		

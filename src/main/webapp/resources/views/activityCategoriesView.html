@@ -1,0 +1,27 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--container Start-->
+		<div class="post-info-rightsection "> 
+   			<h3 class="section-title">Activities Category 
+   			<span class="fr">
+   			<a class="btn btn-sm btn-success" ng-href ="#/activityCategoriesEdit/{{activityCategory._id}}"><i class="fa fa-edit"></i> Edit</a>  <b> </b>  <a class="btn btn-sm btn-warning" ng-href ="#/activityCategories"><i class="fa fa-th-list"></i> Activity Category List</a>
+   			</span></h3>
+	         <p class="info-field">
+	             <label class="main-label">Category Name</label>{{activityCategory.category}}
+	         </p>
+	         
+			
+            <p class="info-field"> 
+ 				<label class="main-label">Is Active</label> <span ng-if="activityCategory.isActive=='0'" >No</span><span ng-if="activityCategory.isActive=='1'" >Yes</span>
+ 			</p>	
+         	
+         	<p class="info-field"> 
+ 				<label class="main-label">Created Date</label> {{activityCategory.createdDate}}
+ 			</p>
+ 			
+ 			<p class="info-field"> 
+ 				<label class="main-label">Updated Date</label> {{activityCategory.updatedDate}}
+ 			</p>
+	    </div>
+	</div>
+	
+

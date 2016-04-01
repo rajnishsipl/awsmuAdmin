@@ -1,0 +1,59 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--container Start-->
+		<div class="post-info-rightsection "> 
+   			<h3 class="section-title">Activity Details 
+   			<span class="fr">
+   			<a class="btn btn-sm btn-success" ng-href ="#/activitiesEdit/{{activity._id}}"><i class="fa fa-edit"></i> Edit</a>  <b> </b>  <a class="btn btn-sm btn-warning" ng-href ="#/activities"><i class="fa fa-th-list"></i> Activities List</a>
+   			</span></h3>
+	         <p class="info-field">
+	             <label class="main-label">Category Name</label>{{activity.category}}
+	         </p>
+	         <p class="info-field">   
+                 <label class="main-label">Problems Name</label> <u ng-repeat="problem in activity.problems">{{problem}}{{$last ? '' : ', '}}</u>
+             </p>    
+             <p class="info-field"> 
+              	<label class="main-label">Action </label> {{activity.action}}
+			 </p>
+			 <p class="info-field"> 
+				<label class="main-label">Description </label> {{activity.description}}
+			 </p>
+			 <p class="info-field"> 	
+				<label class="main-label">Amount</label> {{activity.amount}}
+			</p>
+			<p class="info-field"> 
+				<label class="main-label">Frequency</label> {{activity.frequency}}
+			</p>
+			<p class="info-field"> 	
+				<label class="main-label">Minimum Time</label> {{activity.minTime}}
+			</p>
+			<p class="info-field"> 
+				<label class="main-label">Maximum Time</label> {{activity.maxTime}}
+			</p>
+			<p class="info-field"> 
+				<label class="main-label">Minimum Age</label> {{activity.minAge}}
+			</p>
+			<p class="info-field"> 
+				<label class="main-label">Maximum Age</label> {{activity.maxAge}} 
+			</p>
+			<p class="info-field"> 
+				 <label class="main-label">Nationality</label> {{activity.nationality}}
+            </p>    
+			<p class="info-field"> 
+                <label class="main-label">Gender</label> {{activity.gender}}
+            </p>
+           <p class="info-field"> 
+ 				<label class="main-label">Is Active</label> <span ng-if="activity.isActive=='0'" >No</span><span ng-if="activity.isActive=='1'" >Yes</span>
+ 			</p>	
+         	
+         	<p class="info-field"> 
+ 				<label class="main-label">Created Date</label> {{activity.createdDate}}
+ 			</p>
+ 			
+ 			<p class="info-field"> 
+ 				<label class="main-label">Updated Date</label> {{activity.updatedDate}}
+ 			</p>	
+         
+	    </div>
+	</div>
+	
+

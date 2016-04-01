@@ -1,0 +1,52 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+<div class="container">
+<div class="message-section-thread">
+		<!-- message-section-thread Start -->
+		<div class="thread-title">
+			<h2> 
+				Messages communication in between <a ng-href="{{baseUrl}}#/userView/{{messageDetail.fromUser.userId}}" title="{{messageDetail.fromUser.displayName}}">{{messageDetail.fromUser.displayName}}</a> and <a ng-href="{{baseUrl}}#/userView/{{messageDetail.toUser.userId}}" title="{{messageDetail.toUser.displayName}}">{{messageDetail.toUser.displayName}}</a> <br/> <span><a ng-href="#/messages"><i class="fa-angle-left"></i> Go Back</a></span>
+			</h2>
+			<div class="clr"></div>
+		</div>
+		<div class="row">
+			<ul class="list-unstyled align-center" ng-show="previousAvl">
+				<li><a href="javascript:void(0)"
+					ng-click="getMessageThread()">Load Previous Messages</a></li>
+			</ul>
+			<ul class="list-unstyled conversation">
+				<li ng-repeat="attr in messagesThread">
+					<aside class="{{messageDetail.fromUser.userId == attr.fromUser.userId?'fl':'fr'}} msg-block">
+						<a target="_top" ng-href="{{baseUrl}}#/userView/{{attr.fromUser.userId}}"
+							title="{{attr.fromUser.displayName}}"><img ng-src="{{attr.fromUser.image}}"
+							alt="{{attr.fromUser.displayName}}" /></a>
+							<!-- <a target="_top" ng-href="{{baseUrl}}#/userView/{{attr.toUser.userId}}"
+							title="{{attr.toUser.displayName}}"><img ng-src="{{attr.toUser.image}}"
+							alt="{{attr.toUser.displayName}}" /></a> -->
+						<div class="msg">
+							<span class="time-date">({{attr.preetyTime}})</span> <span ng-bind-html="attr.message"></span>
+						</div>
+					</aside>
+					<span class="clr"></span>
+				</li>
+			</ul>
+		</div>
+		<!-- message-section-thread End -->
+		
+	</div>
+	<!-- ng-if="role=='admin'" --> 
+		<div class="send-msg-area">
+			<!-- send-msg-area Start -->
+			<form  name="messageForm" novalidate>			
+				<div class="input-group">
+					<div class="emoji-icon">
+						<textarea name="message" class="form-control" id="newMessage" placeholder="Write your message..." ng-model="messageDetail.message" required></textarea>
+					</div>	
+					<span class="input-group-btn"> <input type="submit" name="Save" value="Send Message" title="Send Message" class="btn" ng-click="messageSend()" id="messageSendButton" /></span>
+				</div>
+				<span class="error-msg" ng-if="messageSent && messageForm.message.$error.required">Message is required</span>
+				<span class="error-msg" ng-if="errorMap.message!=null">{{errorMap.message}}</span> 				
+			
+			</form>
+		</div>
+		<!-- send-msg-area End -->
+</div>

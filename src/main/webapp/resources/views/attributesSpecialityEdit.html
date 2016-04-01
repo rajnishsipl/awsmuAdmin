@@ -1,0 +1,32 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--row Start-->
+		<div class=" post-info-rightsection "> 
+			<h3 class="section-title">Edit Specialties</h3>
+			
+			 <ul class="list-unstyled profile-form">
+	          <li>
+	            <div class="row"><!--row Start-->
+	              <ng-form name="attributeSpecialityForm" novalidate> 
+	              <div ng-repeat="speciality in specialities.value" class="col-lg-3 col-md-4 col-sm-6 attribute-fields">
+					<label class="main-lable" >Name</label> 
+					<div class="input-group">
+					  <input type="text" placeholder="Speciality Name" class="form-control" name="name" ng-model="specialities.value[$index]" ng-maxlength="100"  required>
+					  <span class="input-group-addon"><input type="button" class="btn btn-primary btn-sm" value="Delete" ng-click="removeData(speciality)" /></span>
+					</div>
+					<span class="error-msg" ng-if="attributeSpecialitySubmitted && attributeSpecialityForm.name.$error.required">Speciality name is required</span>
+					<span class="error-msg" ng-if="attributeSpecialitySubmitted && attributeSpecialityForm.name.$error.maxlength">Speciality name should not exceed than 100 characters</span> 
+					
+					<span class="error-msg" ng-if="errors.name">{{errors.speciality}}</span>
+					<span>&nbsp;</span>
+				  </div>
+				  </ng-form>
+					
+          		</div>
+          		</li>
+          			
+          		</ul>
+          		<input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Update'}}" ng-click="updateAttributeSpecialitiesSubmit()" ng-disabled="loading">
+       		
+      	</div>
+      </div>
+           

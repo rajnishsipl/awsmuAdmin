@@ -1,0 +1,89 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--row Start-->
+		<div class=" post-info-rightsection "> 
+			<h3 class="section-title">Add Attribute Country</h3>
+			
+			 <ul class="list-unstyled profile-form" ng-repeat="country in countries.value">
+	          <li>
+	            <div class="row" ><!--row Start-->
+	              <ng-form name="attributeCountryForm" novalidate> 
+	              <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable" >Name</label> 
+					<input type="text" placeholder="Country Name" class="form-control" name="name" ng-model="countries.value[$index].name" ng-maxlength="100"  required>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.name.$error.required">Country name is required</span>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.name.$error.maxlength">Country name should not exceed than 100 characters</span> 
+					<span class="error-msg" ng-if="errors.name">{{errors.name}}</span>
+				  </div>
+				  
+				   <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable" >Nicename</label> 
+					
+					<input type="text" placeholder="Country Nicename" class="form-control" name="nicename" ng-model="countries.value[$index].nicename" ng-maxlength="100"  required>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.nicename.$error.required">Country nicename is required</span>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.nicename.$error.maxlength">Country nicename should not exceed than 100 characters</span> 
+					
+					<span class="error-msg" ng-if="errors.name">{{errors.nicename}}</span>
+				  </div>
+				
+				 <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable">Nationality</label> 
+					<input type="text" placeholder="Country Nationality" class="form-control" name="nationality" ng-model="countries.value[$index].nationality" ng-maxlength="100"  required>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.nationality.$error.required">Country nationality is required</span>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.nationality.$error.maxlength">Country nationality should not exceed than 100 characters</span> 
+					
+					<span class="error-msg" ng-if="errors.name">{{errors.nationality}}</span>
+				  </div>
+				  
+				  <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable">ISO</label> 
+					<input type="text" placeholder="Country ISO" class="form-control" name="iso" ng-model="countries.value[$index].iso" ng-maxlength="2"  required>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.iso.$error.required">Country ISO is required</span>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.iso.$error.maxlength">Country ISO should not exceed than 2 characters</span> 
+					
+					<span class="error-msg" ng-if="errors.name">{{errors.iso}}</span>
+				  </div>
+				 </div>
+				</li> 
+				<li>
+	            <div class="row"><!--row Start-->  
+				   <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable">ISO-3</label> 
+					<input type="text" placeholder="Country ISO-3" class="form-control" name="iso3" ng-model="countries.value[$index].iso3" ng-maxlength="3"  required>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.iso3.$error.required">Country ISO-3 is required</span>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.iso3.$error.maxlength">Country ISO-3 should not exceed than 3 characters</span> 
+					
+					<span class="error-msg" ng-if="errors.name">{{errors.iso3}}</span>
+				  </div>
+				  
+				  <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable">Numcode</label> 
+					<input type="text" placeholder="Country Numcode" class="form-control" name="numcode" ng-model="countries.value[$index].numcode" ng-maxlength="3"  required>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.numcode.$error.required">Country numcode is required</span>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.numcode.$error.maxlength">Country numcode should not exceed than 3 characters</span> 
+					
+					<span class="error-msg" ng-if="errors.name">{{errors.numcode}}</span>
+				  </div>
+				  
+				    <div class="col-lg-3 col-md-4 col-sm-6">
+					<label class="main-lable">Phonecode</label> 
+					<input type="text" placeholder="Country Phonecode" class="form-control" name="phonecode" ng-model="countries.value[$index].phonecode" ng-maxlength="3"  required>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.phonecode.$error.required">Country phonecode is required</span>
+					<span class="error-msg" ng-if="attributeCountrySubmitted && attributeCountryForm.phonecode.$error.maxlength">Country phonecode should not exceed than 3 characters</span> 
+					
+					<span class="error-msg" ng-if="errors.phonecode">{{errors.phonecode}}</span>
+				  </div>
+				   <div class="col-lg-3 col-md-4 col-sm-6">
+				   <label class="main-lable">&nbsp;</label>
+						<input type="button" class="btn btn-primary btn-sm" value="Delete" ng-click="removeData(country)">
+       			  </div>
+				</ng-form>
+					
+          		</div>
+          		</li>
+          			
+          		</ul>
+          		<input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Update'}}" ng-click="updateAttributeCountrySubmit()" ng-disabled="loading">
+       		
+      	</div>
+      </div>
+          		

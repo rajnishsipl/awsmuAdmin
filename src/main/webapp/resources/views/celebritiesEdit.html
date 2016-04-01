@@ -1,0 +1,116 @@
+<div ng-include="viewPath+'layout/navigator.html'"></div>
+	<div class="container"><!--row Start-->
+		<div class=" post-info-rightsection "> 
+			<h3 class="section-title">Add Celebrity </h3>
+			
+			
+			<form name="celebrityForm" novalidate> 
+			 <ul class="list-unstyled profile-form">
+	          <li>
+		            <div class="row"><!--row Start-->
+			              <div class="col-lg-3 col-md-4 col-sm-6">
+							<label class="main-lable">Name</label> 
+							
+							<input type="text" placeholder="Name" class="form-control" name="name" ng-model="celebrity.name" maxlength="50" required>
+														
+							<span class="error-msg" ng-if="celebritySubmitted && celebrityForm.name.$error.required">Celebrity name is required</span>
+							<span class="error-msg" ng-if="celebritySubmitted && celebrityForm.name.$error.maxlength">Celebrity name should not exceed than 50 characters</span> 
+							<span class="error-msg" ng-if="errors.name">{{errors.name}}</span>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6">
+		                 <label class="main-lable">Gender</label>
+		             		<div class="btn-group pad-new">
+		                     <label class="btn btn-default" ng-class="{'active':celebrity.gender == 'Male'}">
+		                     <input type="radio"  class="btn btn-default" id="q160" name="gender" ng-model="celebrity.gender" value="Male" required/>
+		                     <i class="fa-male"></i> Male</label>
+		                    <label class="btn btn-default" ng-class="{'active':celebrity.gender == 'Female'}">
+		                     <input type="radio"  class="btn btn-default"  id="q161"  name="gender" ng-model="celebrity.gender" value="Female" required />
+		                     <i class="fa-female"></i> Female </label>
+		                      <span class="error-msg" ng-if="celebritySubmitted && celebrityForm.gender.$error.required">Gender is required</span>
+		                 	</div>
+		          		</div>
+	          		</div>
+          		</li>
+          		
+          		<li>
+		            <div class="row"><!--row Start-->
+		                <div class="col-lg-6 col-md-6 col-sm-6">
+			             	<label class="main-lable"> Profession</label>
+				            <input type="text" placeholder="Profession" class="form-control" name="profession" ng-model="celebrity.profession" maxlength="50" required>
+							<span class="error-msg" ng-if="celebritySubmitted && celebrityForm.profession.$error.required">Profession is required</span>
+			               <span class="error-msg" ng-if="errors.profession">{{errors.profession}}</span>
+						</div>
+						
+						<div class="col-lg-6 col-md-6 col-sm-6">
+			             	<label class="main-lable"> Nationality</label>
+				            <input type="text" placeholder="Nationality" class="form-control" name="nationality" ng-model="celebrity.nationality" maxlength="50" required>
+							<span class="error-msg" ng-if="celebritySubmitted && celebrityForm.nationality.$error.required">Nationality is required</span>
+			               <span class="error-msg" ng-if="errors.profession">{{errors.nationality}}</span>
+						</div>
+		               </div>
+				</li>
+          		<li>
+		            <div class="row"><!--row Start-->
+		               
+		                <div class="col-md-12">
+              				<label class="main-lable">Current Image</label>
+              				<img  height="100"  ng-src="{{celebrity.imageUrl+celebrity.mainImage}}"> 
+              			</div>
+		                <div class="col-lg-6 col-md-6 col-sm-6">
+			             	<label class="main-lable">Image</label>
+				           	<input name="mainImage" id="mainImage" type="file" ngf-select ng-model="mainImage" class="upload"/>
+			  				<span class="error-msg" ng-if="mainImageError">Please upload file in jpg, jpeg or png format with max size limit of 4 MB</span>
+			 	   			<span class="error-msg" ng-if="errors.mainImage">{{errors.mainImage}}</span>
+             
+						</div>
+						
+						<div class="col-lg-3 col-md-4 col-sm-6">
+	          			
+		                 	<label class="main-lable">Is Active</label>
+		             		<div class="btn-group pad-new">
+		                     <label class="btn btn-default" ng-class="{'active':celebrity.isActive == 1}">
+		                     <input type="radio"  class="btn btn-default" id="q156" name="isActive" ng-model="celebrity.isActive" value="1" required/>
+		                     <i class="fa-male"></i> Yes</label>
+		                    <label class="btn btn-default" ng-class="{'active':celebrity.isActive == 0}">
+		                     <input type="radio"  class="btn btn-default"  id="q157"  name="isActive" ng-model="celebrity.isActive" value="0" required />
+		                     <i class="fa-female"></i> No </label>
+		                      <span class="error-msg" ng-if="celebritySubmitted && celebrityForm.isActive.$error.required">Is Active is required</span>
+		                 	</div>
+		               </div>
+		               </div>
+				</li>
+          		 
+          		<!-- <li ng-repeat="image in celebrity.images">  -->
+          		<li> 
+	          		<div class="row"><!--row Start-->
+	 
+		                 	<label class="main-lable">Attribute  </label>
+		             		 
+		             		 <ol class="nya-bs-select clr" name="problemNames" ng-model="problemNames" multiple>
+                				<li nya-bs-option="problem in problemList| orderBy" data-value="problem.title"> <a> <span>{{ problem.title }}</span> <span class="glyphicon glyphicon-ok check-mark"></span> </a> </li>
+              				</ol>
+		             		 
+		             		
+		                    <div class="col-lg-3 col-md-4 col-sm-6" >
+		                    </div>
+					</div>
+		                    
+	         </li>
+          	  <li>
+	          		<div class="row"><!--row Start-->
+	          			<!-- <div class="col-lg-3 col-md-4 col-sm-6">
+	          			<input type="button" class="btn" ng-click="addOptions()" value="Add more Option"/>
+		                 	
+		               </div> -->
+	          		 </div>
+	          		 <input type="submit" class="btn btn-primary btn-sm" value="{{loading && 'Please wait...' || 'Update'}}" ng-click="updateCelebritySubmit()" ng-disabled="loading">
+          		</li>
+          		
+          		
+          		
+       		</ul>
+       		</form>
+       		
+      	</div>
+      </div>
+          		
